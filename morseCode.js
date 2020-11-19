@@ -1,9 +1,11 @@
+//Event handlers from index.html
 let paddle = document.getElementById("timer");
 let output = document.getElementById("output");
 let clear  = document.getElementById("clear");
 let light  = document.getElementById("light");
 let words  = document.getElementById("letter");
 let audio  = new Audio("../beep.wav");
+//Global variables for morseCode.js
 let timeElapsed2 = 0;
 let timeElapsed  = 0;
 let answer = "";
