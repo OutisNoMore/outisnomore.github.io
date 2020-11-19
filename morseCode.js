@@ -1,6 +1,6 @@
 let audio = new Audio("../beep.wav");
-let b = "";
-let a = "";
+let guess = "";
+let answer = "";
 let timeElapsed = 0;
 let timeElapsed2 = 0;
 let timer;
@@ -10,7 +10,7 @@ let output = document.getElementById("output");
 let clear = document.getElementById("clear");
 let light = document.getElementById("light");
 let words = document.getElementById("letter");
-let alphabet2 = ['a',
+let alphabet = ['a',
 		 'b',
 		 'c',
 		 'd',
@@ -37,7 +37,7 @@ let alphabet2 = ['a',
 		 'y',
 		 'z',
                  ' ',];
-let alphabet = [".-",
+let morse = [".-",
 		"-...",
 		"-.-.",
 		"-..",
@@ -64,17 +64,17 @@ let alphabet = [".-",
 		"-.--",
 		"--..",];
 
-a = getLetter();
-document.getElementById("test").innerHTML = a;
+answer = getLetter();
+document.getElementById("test").innerHTML = answer;
 
 //Handles use of buttons
 //keydown starts buzzer
 
-paddle.addEventListener("touchstart", ()=>{light.innerHTML= "a";});
+//paddle.addEventListener("touchstart", ()=>{light.innerHTML= "a";}); //test for phones/tablets
 
 paddle.addEventListener("keydown",
   function(event){
-    if(event.keyCode == 32){
+    if(event.keyCode == 32){//spacebar pressed
       audio.play();
       startTimer();
       stopTimer2();
@@ -85,7 +85,7 @@ paddle.addEventListener("keydown",
 //key up, stops buzzer
 paddle.addEventListener("keyup",
   function(event){
-    if(event.keyCode == 32){
+    if(event.keyCode == 32){//spacebar pressed
       audio.pause();
       stopTimer();
       startTimer2();
@@ -96,7 +96,7 @@ paddle.addEventListener("keyup",
 //delete one dot or slash
 paddle.addEventListener("keydown",
   function(event){
-    if(event.keyCode == 8){
+    if(event.keyCode == 8){//backspace bar
       backspace();
     }
   }
@@ -113,7 +113,7 @@ paddle.addEventListener("keydown",
   }
 );
 */
-//clear output
+//clear button, deletes all output 
 clear.addEventListener("click",
   function(){
     output.innerHTML = "";
@@ -125,378 +125,108 @@ clear.addEventListener("click",
 //enumerates dots and slashes to alphabet letter
 function translate(){
   let index = output.innerHTML.indexOf(" ");
-  let morse = output.innerHTML.substring(0,index);
-//  words.innerHTML = "*";
-  switch(morse){
-  case alphabet[0]:
-    b = "a";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-  //    alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  let morseCode = output.innerHTML.substring(0,index);
+  switch(morseCode){
+  case morse[0]:
+    guess = "a";
     break;
-  case alphabet[1]:
-    b = "b";
-    words.innerHTML += b;
-    if(b == a){
-    //  alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[1]:
+    guess = "b";
     break;
-  case alphabet[2]:
-    b = "c";
-    words.innerHTML += b;
-    if(b == a){
-      //alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[2]:
+    guess = "c";
     break;
-  case alphabet[3]:
-    b = "d";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[3]:
+    guess = "d";
     break;
-  case alphabet[4]:
-    b = "e";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[4]:
+    guess = "e";
     break;
-  case alphabet[5]:
-    b = "f";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[5]:
+    guess = "f";
     break;
-  case alphabet[6]:
-    b = "g";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[6]:
+    guess = "g";
     break;
-  case alphabet[7]:
-    b = "h";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[7]:
+    guess = "h";
     break;
-  case alphabet[8]:
-    b = "i";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[8]:
+    guess = "i";
     break;
-  case alphabet[9]:
-    b = "j";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[9]:
+    guess = "j";
     break;
-  case alphabet[10]:
-    b = "k";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[10]:
+    guess = "k";
     break;
-  case alphabet[11]:
-    b = "l";
-    words.innerHTML += b;
-    if(b == a){
-   //   alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[11]:
+    guess = "l";
     break;
-  case alphabet[12]:
-    b = "m";
-    words.innerHTML += b;
-    if(b == a){
- //     alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[12]:
+    guess = "m";
     break;
-  case alphabet[13]:
-    b = "n";
-    words.innerHTML += b;
-    if(b == a){
-  //    alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[13]:
+    guess = "n";
     break;
-  case alphabet[14]:
-    b = "o";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[14]:
+    guess = "o";
     break;
-  case alphabet[15]:
-    b = "p";
-    words.innerHTML += b;
-    if(b == a){
-   //   alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[15]:
+    guess = "p";
     break;
-  case alphabet[16]:
-    b = "q";
-    words.innerHTML += b;
-    if(b == a){
- //     alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[16]:
+    guess = "q";
     break;
-  case alphabet[17]:
-    b = "r";
-    words.innerHTML += b;
-    if(b == a){
-    //  alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[17]:
+    guess = "r";
     break;
-  case alphabet[18]:
-    b = "s";
-    words.innerHTML += b;
-    if(b == a){
-  //    alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[18]:
+    guess = "s";
     break;
-  case alphabet[19]:
-    b = "t";
-    words.innerHTML += b;
-    if(b == a){
-  //    alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[19]:
+    guess = "t";
     break;
-  case alphabet[20]:
-    b = "u";
-    words.innerHTML += b;
-    if(b == a){
-  //    alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[20]:
+    guess = "u";
     break;
-  case alphabet[21]:
-    b = "v";
-    words.innerHTML += b;
-    if(b == a){
-  //    alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[21]:
+    guess = "v";
     break;
-  case alphabet[22]:
-    b = "w";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[22]:
+    guess = "w";
     break;
-  case alphabet[23]:
-    b = "x";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[23]:
+    guess = "x";
     break;
-  case alphabet[24]:
-    b = "y";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[24]:
+    guess = "y";
     break;
-  case alphabet[25]:
-    b = "z";
-    words.innerHTML += b;
-    if(b == a){
-//      alert("correct");
-      a = getLetter();
-      document.getElementById("test").innerHTML = a;
-    }
-    else{
-      alert("wrong!");
-    }
-    output.innerHTML = "";
-    timeElapsed2 = 0;
+  case morse[25]:
+    guess = "z";
     break;
   default:
-    output.innerHTML = "";
+    alert("Not a letter...");
     break;
   }
+  words.innerHTML += guess;
+
+  checkAnswer();
+	
+  output.innerHTML = "";
+  timeElapsed2 = 0;
 //  clearInterval(timer2);
+}
+
+function checkAnswer(){
+  if(guess == answer){
+      alert("correct");
+      answer = getLetter();
+      document.getElementById("test").innerHTML = answer;
+    }
+    else{
+      alert("wrong!");
+    }
 }
 
 //deletes one dot or slash
@@ -506,7 +236,7 @@ function backspace(){
   timeElapsed2 = 0;
 }
 
-//starts timer for buzzer
+//starts timer for buzzer or when key pressed
 function startTimer(){
   timer = setInterval(
     function(){
@@ -529,17 +259,17 @@ function stopTimer(){
   light.style.color = "black";
 }
 
-//starts timer for space
+//starts timer for space or key not pressed
 function startTimer2(){
   timer2 = setInterval(
     function(){
       timeElapsed2++;
       if(timeElapsed2 > 300){
 	words.innerHTML += " ";
-	if(a == ' '){
+	if(answer == ' '){
 	  alert("correct!");
-	  a = getLetter();
-	  document.getElementById("test").innerHTML = a;
+	  answer = getLetter();
+	  document.getElementById("test").innerHTML = answer;
 	}
         timeElapsed2 = 0;
       }
@@ -557,6 +287,6 @@ function stopTimer2(){
 }
 
 function getLetter(){
-  return alphabet2[Math.floor((Math.random()*27))];
+  return alphabet[Math.floor((Math.random()*27))];
 }
 
