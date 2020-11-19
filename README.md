@@ -1,3 +1,3 @@
-# playground
-Trying to figure out how this works...
-Planning to include c++, java, javascript, php, sql.
+# Learn morse code interactively
+Currently the website supports inputting morse code and translating it into letters using the space bar...
+When done this website will include a morse code chatbot to help improve your morse code skills
