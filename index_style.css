@@ -1,0 +1,43 @@
+html{
+  font-size: 25px;
+  font-family: "Open Sans", sans-serif;
+}
+
+h1{
+  font-size: 60px;
+  text-align: center;
+  margin: 0;
+  padding: 20px 0;
+}
+
+div.reply {
+  position: absolute;
+  top: 325px;
+  right: 100px;
+  max-width: 700px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+p, li{
+  font-size: 16px;
+  padding: 0 30px 20px;
+  line-height: 2;
+  letter-spacing: 1px;
+}
+
+#test {
+  font-size: 16px;
+  padding: 0 30px 20px;
+  line-height: 2;
+  letter-spacing: 1px;
+  color: red;
+}
+/*
+body{
+  width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px 20px;
+  border: 0px solid black;
+}
+*/

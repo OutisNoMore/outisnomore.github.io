@@ -4,75 +4,73 @@ let output = document.getElementById("output");
 let clear  = document.getElementById("clear");
 let light  = document.getElementById("light");
 let words  = document.getElementById("letter");
-let audio  = new Audio("beep.wav");
-//Global variables for morseCode.js
+let show   = document.getElementById("show");
+//audio file for the morse code beep
+let audio  = new Audio("../beep.wav");
+//global variables for this program
 let timeElapsed2 = 0;
 let timeElapsed  = 0;
-let answer = "";
 let guess  = "";
 let timer;
 let timer2;
-let alphabet = ['a',
-		 'b',
-		 'c',
-		 'd',
-		 'e',
-		 'f',
-		 'g',
-		 'h',
-		 'i',
-		 'j',
-		 'k',
-		 'l',
-		 'm',
-		 'n',
-		 'o',
-		 'p',
-		 'q',
-		 'r',
-		 's',
-		 't',
-		 'u',
-		 'v',
-		 'w',
-		 'x',
-		 'y',
-		 'z',
-                 ' ',];
-let morse = [".-",
-		"-...",
-		"-.-.",
-		"-..",
-		".",
-		"..-.",
-		"--.",
-		"....",
-		"..",
-		".---",
-		"-.-",
-		".-..",
-		"--",
-		"-.",
-		"---",
-		".--.",
-		"--.-",
-		".-.",
-		"...",
-		"-",
-		"..-",
-		"...-",
-		".--",
-		"-..-",
-		"-.--",
-		"--..",];
+let dt;
+let ds;
 
-answer = getLetter();
-document.getElementById("test").innerHTML = answer;
+function dot(){
+  clearInterval(ds);
+  audio.play();
+  dot = setInterval(function(){
+    if(audio.currentTime > 0.1){
+	    console.log('dot: ' + audio.currentTime);
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }, 1);
+}
+
+function dash(){
+  clearInterval(dt);
+  audio.play();
+  dash = setInterval(function(){
+	  console.log('dash: ' + audio.currentTime);
+  if(audio.currentTime > 0.3){
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }, 1);
+}
+
+audio.play();
+for(let i = 0; i < 100; i++){
+	console.log('i: ' + i);
+}
+audio.pause();
+//audio.play();
+//for(let j = 0; j < 500; j++){
+//	console.log('j: ' + j);
+//}
+//audio.pause();
+//dash();
+//dot();
+//while(!audio.paused){
+//}
+//setTimeout(dash, 1000);
+
+//shows or hides morse 
+show.addEventListener("click",
+  function(){
+    if(words.style.display === "none"){ //if text is displayed, get rid of text
+      words.style.display = "block";
+    }else{
+      words.style.display = "none";
+    }
+  }
+);
 
 //keydown starts buzzer
 paddle.addEventListener("keydown",
   function(event){
-    if(event.keyCode == 32){//spacebar pressed
+    if(event.keyCode === 32){//spacebar pressed
       audio.play();
       startTimer();
       stopTimer2();
@@ -83,7 +81,7 @@ paddle.addEventListener("keydown",
 //key up, stops buzzer
 paddle.addEventListener("keyup",
   function(event){
-    if(event.keyCode == 32){//spacebar pressed
+    if(event.keyCode === 32){//spacebar pressed
       audio.pause();
       stopTimer();
       startTimer2();
@@ -91,21 +89,15 @@ paddle.addEventListener("keyup",
   }
 );
 
-//delete one dot or slash
+//delete one character 
 paddle.addEventListener("keydown",
   function(event){
-    if(event.keyCode == 8){//backspace bar
-      backspace();
+    if(event.keyCode === 8){//backspace bar
+      let letters = words.innerHTML;
+      words.innerHTML = letters.substring(0, letters.length-1);
     }
   }
 );
-
-//deletes one dot or slash
-function backspace(){
-  let letters = output.innerHTML;
-  output.innerHTML = letters.substring(0, letters.length-1);
-  timeElapsed2 = 0;
-}
 
 //clear button, deletes all output 
 clear.addEventListener("click",
@@ -121,110 +113,129 @@ function translate(){
   let index = output.innerHTML.indexOf(" ");
   let morseCode = output.innerHTML.substring(0,index);
   switch(morseCode){
-  case morse[0]:
+  case ".-":
     guess = "a";
     break;
-  case morse[1]:
+  case "-...":
     guess = "b";
     break;
-  case morse[2]:
+  case "-.-.":
     guess = "c";
     break;
-  case morse[3]:
+  case "-..":
     guess = "d";
     break;
-  case morse[4]:
+  case ".":
     guess = "e";
     break;
-  case morse[5]:
+  case "..-.":
     guess = "f";
     break;
-  case morse[6]:
+  case "--.":
     guess = "g";
     break;
-  case morse[7]:
+  case "....":
     guess = "h";
     break;
-  case morse[8]:
+  case "..":
     guess = "i";
     break;
-  case morse[9]:
+  case ".---":
     guess = "j";
     break;
-  case morse[10]:
+  case "-.-":
     guess = "k";
     break;
-  case morse[11]:
+  case ".-..":
     guess = "l";
     break;
-  case morse[12]:
+  case "--":
     guess = "m";
     break;
-  case morse[13]:
+  case "-.":
     guess = "n";
     break;
-  case morse[14]:
+  case "---":
     guess = "o";
     break;
-  case morse[15]:
+  case ".--.":
     guess = "p";
     break;
-  case morse[16]:
+  case "--.-":
     guess = "q";
     break;
-  case morse[17]:
+  case ".-.":
     guess = "r";
     break;
-  case morse[18]:
+  case "...":
     guess = "s";
     break;
-  case morse[19]:
+  case "-":
     guess = "t";
     break;
-  case morse[20]:
+  case "..-":
     guess = "u";
     break;
-  case morse[21]:
+  case "...-":
     guess = "v";
     break;
-  case morse[22]:
+  case ".--":
     guess = "w";
     break;
-  case morse[23]:
+  case "-..-":
     guess = "x";
     break;
-  case morse[24]:
+  case "-.--":
     guess = "y";
     break;
-  case morse[25]:
+  case "--..":
     guess = "z";
+    break;
+  case "..--..":
+    guess = "?";
+    break;
+  case ".-.-.-":
+    guess = ".";
+    break;
+  case "-.-.--":
+    guess = "!";
+    break;
+  case ".----":
+    guess = "1";
+    break;
+  case "..---":
+    guess = "2";
+    break;
+  case "...--":
+    guess = "3";
+    break;
+  case "....-":
+    guess = "4";
+    break;
+  case ".....":
+    guess = "5";
+    break;
+  case "-....":
+    guess = "6";
+    break;
+  case "--...":
+    guess = "7";
+    break;
+  case "---..":
+    guess = "8";
+    break;
+  case "----.":
+    guess = "9";
+    break;
+  case "-----":
+    guess = "0";
     break;
   default:
     guess = "";
-    break;
   }
   words.innerHTML += guess;
 
-//  checkAnswer();
-
   output.innerHTML = "";
-}
-
-//guessing game
-function checkAnswer(){
-  if(guess == answer){
-      alert("correct");
-      answer = getLetter();
-      document.getElementById("test").innerHTML = answer;
-  }else{
-      alert("wrong!");
-  }
-  guess = "";
-}
-
-//gets random letter in alphabet, including space
-function getLetter(){
-  return alphabet[Math.floor((Math.random()*27))];
 }
 
 //starts timer for how long key is pressed
@@ -254,7 +265,7 @@ function startTimer2(){
   timer2 = setInterval(
     function(){
       timeElapsed2++;
-      if(timeElapsed2 > 300){ //more than 300 milliseconds is a space or end of a word
+      if(timeElapsed2 > 200){ //more than 300 milliseconds is a space or end of a word
         words.innerHTML += " ";
 	stopTimer2();
       }else if(timeElapsed2 > 100){ //more than 100 milliseconds is end of a letter
