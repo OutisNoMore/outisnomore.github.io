@@ -40,22 +40,6 @@ function dash(){
   }, 1);
 }
 
-audio.play();
-for(let i = 0; i < 100; i++){
-	console.log('i: ' + i);
-}
-audio.pause();
-//audio.play();
-//for(let j = 0; j < 500; j++){
-//	console.log('j: ' + j);
-//}
-//audio.pause();
-//dash();
-//dot();
-//while(!audio.paused){
-//}
-//setTimeout(dash, 1000);
-
 //shows or hides morse 
 show.addEventListener("click",
   function(){
