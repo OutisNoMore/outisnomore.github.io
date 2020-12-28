@@ -10,10 +10,9 @@ let audio  = new Audio("../beep.wav");
 //global variables for this program
 let timeElapsed = 0;
 let spaceTimer;
-let guess;
-
-let start;
 let elapsed;
+let start;
+let guess;
 
 //shows or hides morse 
 show.addEventListener("click", function(){
@@ -47,6 +46,7 @@ paddle.addEventListener("keydown", function(event){
 paddle.addEventListener("keyup", function(event){
   if(event.keyCode === 32){//spacebar pressed
     audio.pause();
+    isPlaying = false;
     light.style.color = "black";
     elapsed = Date.now() - start;
     if(elapsed < 100){
@@ -78,10 +78,10 @@ clear.addEventListener("click", function(){
 function startTimer(){
   spaceTimer = setInterval(function(){
     timeElapsed++;
-    if(timeElapsed > 200){ //more than 300 milliseconds is a space or end of a word
+    if(timeElapsed > 100){ //more than 300 milliseconds is a space or end of a word
       words.innerHTML += " ";
       stopTimer();
-    }else if(timeElapsed > 100){ //more than 100 milliseconds is end of a letter
+    }else if(timeElapsed > 40){ //more than 100 milliseconds is end of a letter
       output.innerHTML += " ";
       translate();
     }
