@@ -22,20 +22,30 @@ send.addEventListener("click", function(){
  
   fetch(query)
     .then(function(response){
+      clearInterval(wait);
       return response.text();
     })
     .then(function(object){
-//      clearInterval(wait);
       typeEffect(object);
+      toMorse(object);
     })
     .catch(function(error){
-      console.error('Error:', error);
+      alert('Error:', error);
+      res.innerHTML = "";
+      clearInterval(wait);
     });
-    talking = false;
 });
 
+function toMorse(sequence){
+  let morse = "";
+  sequence.split('').forEach(letter => {
+    letter = letter.toLowerCase();
+    morse += revTranslate(letter);
+  });
+  makeSound(morse);
+}
+
 function typeEffect(words){
-  clearInterval(wait);
   res.innerHTML = "";
   let i = 0;
   let timer = setInterval(function(){
