@@ -25,11 +25,3 @@ p, li{
   line-height: 2;
   letter-spacing: 1px;
 }
-
-#test {
-  font-size: 16px;
-  padding: 0 30px 20px;
-  line-height: 2;
-  letter-spacing: 1px;
-  color: red;
-}
