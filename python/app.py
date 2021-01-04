@@ -14,7 +14,7 @@ CORS(app)
 logger = logging.getLogger()
 logger.setLevel(logging.CRITICAL)
 
-chatbot = ChatBot('morsie', storage_adapter='chatterbot.storage.SQLStorageAdapter', database_uri='mysql://root:!do6Em7als@localhost/chatbot')
+chatbot = ChatBot('morsie', storage_adapter='chatterbot.storage.SQLStorageAdapter', database_uri='')
 
 @app.route('/chatbot', methods=['GET'])
 def anything():
