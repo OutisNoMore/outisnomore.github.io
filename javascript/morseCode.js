@@ -73,24 +73,97 @@ clear.addEventListener("click", function(){
   words.innerHTML = "";
   stopTimer();
 });
+let morseToLet = {
+  ".-": "a",
+  "-...": "b",
+  "-.-.": "c",
+  "-..": "d",
+  ".": "e",
+  "..-.": "f",
+  "--.": "g",
+  "....": "h",
+  "..": "i",
+  ".---": "j",
+  "-.-": "k",
+  ".-..": "l",
+  "--": "m",
+  "-.": "n",
+  "---": "o",
+  ".--.": "p",
+  "--.-": "q",
+  ".-.": "r",
+  "...": "s",
+  "-": "t",
+  "..-": "u",
+  "...-": "v",
+  ".--": "w",
+  "-..-": "x",
+  "-.--": "y",
+  "--..": "z",
+  "-----": "0",
+  ".----": "1",
+  "..---": "2",
+  "...--": "3",
+  "....-": "4",
+  ".....": "5",
+  "-....": "6",
+  "--...": "7",
+  "---..": "8",
+  "----.": "9",
+  "..--..": "?",
+  ".-.-.-": ".",
+  "-.-.--": "!",
+  " ": " "
+}
+
+function revTranslate(letter){
+  let output = "";
+
+  for(let i in morseToLet){
+    if(morseToLet[] == letter){
+      output = i;
+    }
+  }
+
+  return output + " ";
+}
+
+function translate(){
+  let index = output.innerHTML.indexOf(" ");
+  let morseCode = output.innerHTML.substring(0, index);
+  output.innerHTML = "";
+
+  if(morseToLet[morseCode]){
+    words.innerHTML += morseToLet[morseCode];
+  }
+}
 
 //starts timer for how long key not pressed
 function startTimer(){
   spaceTimer = setInterval(function(){
     timeElapsed++;
-    if(timeElapsed > 100){ //more than 300 milliseconds is a space or end of a word
+    if(timeElapsed > 100){
+       stopTimer(); 
+    }
+    /*if(timeElapsed > 100){ //more than 300 milliseconds is a space or end of a word
       words.innerHTML += " ";
       stopTimer();
     }else if(timeElapsed > 40){ //more than 100 milliseconds is end of a letter
       output.innerHTML += " ";
       translate();
-    }
+    }*/
   }, 1);
 }
 
 //stops timer for show long key is not pressed
 function stopTimer(){
   clearInterval(spaceTimer);
+    if(timeElapsed > 100){ //more than 300 milliseconds is a space or end of a word
+      words.innerHTML += " ";
+    }else if(timeElapsed > 40){ //more than 100 milliseconds is end of a letter
+      output.innerHTML += " ";
+      translate();
+    }
   timeElapsed = 0;
 }
 
