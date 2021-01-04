@@ -75,7 +75,7 @@ function revTranslate(letter){
   let output = "";
 
   for(let i in morseToLet){
-    if(morseToLet[] == letter){
+    if(morseToLet[i] == letter){
       output = i;
     }
   }
