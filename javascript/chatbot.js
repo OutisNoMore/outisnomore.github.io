@@ -16,11 +16,19 @@ send.addEventListener("click", function(){
     }
     res.innerHTML += "*";
   }, 500);
-  let query = 'http://127.0.0.1:5000/chatbot?reply=';
-  query += words.innerHTML;
+  //let query = 'http://127.0.0.1:5000/chatbot?reply=';
+  let query = 'https://account.snatchbot.me/channels/api/api/id149554/app1234/apsabcd?user_id=0'
+  let data = { message: words.innerHTML };
   words.innerHTML = "";
  
-  fetch(query)
+  fetch(query,{
+    "method": "POST",
+    "headers":{
+      "Content-Type": "application/json",
+      "Accept": "json"
+    }
+    "body": JSON.stringify(data),
+  })
     .then(function(response){
       clearInterval(wait);
       return response.text();
