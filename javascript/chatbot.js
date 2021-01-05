@@ -31,7 +31,7 @@ send.addEventListener("click", function(){
   })
     .then(function(response){
       clearInterval(wait);
-      return response.text();
+      return response;
     })
     .then(function(object){
       typeEffect(object);
