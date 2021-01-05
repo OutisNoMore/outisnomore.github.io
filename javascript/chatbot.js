@@ -17,7 +17,7 @@ send.addEventListener("click", function(){
     res.innerHTML += "*";
   }, 500);
   //let query = 'http://127.0.0.1:5000/chatbot?reply=';
-  let query = 'https://account.snatchbot.me/channels/api/api/id149554/app1234/apsabcd?user_id=0'
+  let query = 'https://account.snatchbot.me/channels/api/api/id149554/app1234/apsabcd?user_id=0';
   let data = { message: words.innerHTML };
   words.innerHTML = "";
  
