@@ -14,6 +14,9 @@ async function makeSound(sequence){
     test.start(context.currentTime + time);
     time += test.buffer.duration + 0.03;//makes sure order is synchronous with 30 millisecond gap
   });
+  setTimeout(function(){
+    talking = false;
+  }, time*1000);
 }
 
 
