@@ -16,7 +16,7 @@ send.addEventListener("click", function(){
     }
     res.innerHTML += "*";
   }, 500);
-  let query = 'https://account.snatchbot.me/channels/api/api/id149554/app1234/apsmorse?user_id=0';
+  let query = 'https://account.snatchbot.me/channels/api/api/id150028/app1234/apsmorse?user_id=0';
   let data = { message: words.innerHTML };
   words.innerHTML = "";
  
