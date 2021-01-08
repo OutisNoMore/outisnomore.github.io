@@ -25,8 +25,8 @@ send.addEventListener("click", function(){
     "headers":{
       "Content-Type": "application/json",
       "Accept": "json"
-    }
-    "body": JSON.stringify(data),
+    },
+    "body": JSON.stringify(data)
   })
     .then(response => response.json())
     .then(function(object){
