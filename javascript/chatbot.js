@@ -16,8 +16,7 @@ send.addEventListener("click", function(){
     }
     res.innerHTML += "*";
   }, 500);
-  //let query = 'http://127.0.0.1:5000/chatbot?reply=';
-  let query = 'https://account.snatchbot.me/channels/api/api/id149554/app1234/apsabcd?user_id=0';
+  let query = 'https://account.snatchbot.me/channels/api/api/id149554/app1234/apsmorse?user_id=0';
   let data = { message: words.innerHTML };
   words.innerHTML = "";
  
@@ -29,16 +28,16 @@ send.addEventListener("click", function(){
     }
     "body": JSON.stringify(data),
   })
-    .then(function(response){
-      clearInterval(wait);
-      return response;
-    })
+    .then(response => response.json())
     .then(function(object){
-      typeEffect(object);
-      toMorse(object);
+      clearInterval(wait);
+      let text = object.messages[0].message
+      typeEffect(text);
+      toMorse(text);
     })
     .catch(function(error){
-      alert('Error:', error);
+      console.log('Error:', error);
+      talking = false;
       res.innerHTML = "";
       clearInterval(wait);
     });
