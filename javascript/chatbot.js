@@ -21,8 +21,8 @@ send.addEventListener("click", function(){
   words.innerHTML = "";
  
   fetch(query,{
-    "method": "POST",
-    "headers":{
+    method: "POST",
+    headers:{
       "Content-Type": "application/json",
       "Accept": "json"
     },
