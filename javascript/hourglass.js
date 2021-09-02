@@ -1,7 +1,7 @@
 const GIF = 'https://media3.giphy.com/media/l3q2IYN87QjIg51kc/giphy.gif?cid=ecf05e47i54foxrjh7e4w2mbwabd77019c4j5drqu66uittr&rid=giphy.gif'
 
 let Recording = function(cb){
-	let recorder = null;
+  let recorder = null;
   let recording = true;
   let audioInput = null;
   let volume = null;
@@ -9,7 +9,7 @@ let Recording = function(cb){
   let callback = cb;
 
   navigator.getUserMedia = navigator.getUserMedia    || navigator.webkitGetUserMedia ||
-                               navigator.mozGetUserMedia || navigator.msGetUserMedia;
+                           navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
   if(navigator.getUserMedia){
     navigator.getUserMedia({audio:true},
@@ -62,7 +62,7 @@ let rec = new Recording(function(data){
 		console.log('clap!');
 		let url = document.getElementById("hourglass").src;
 		if(url == GIF){
-			document.getElementById("hourglass").src = "./hourglass/hourglass.jpg";
+			document.getElementById("hourglass").src = "../images/hourglass.jpg";
 		} else{
 			document.getElementById("hourglass").src = GIF;
 		}
