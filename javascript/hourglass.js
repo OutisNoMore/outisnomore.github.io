@@ -62,7 +62,7 @@ let rec = new Recording(function(data){
 		console.log('clap!');
 		let url = document.getElementById("hourglass").src;
 		if(url == GIF){
-			document.getElementById("hourglass").src = "../images/hourglass.jpg";
+			document.getElementById("hourglass").src = "images/hourglass.jpg";
 		} else{
 			document.getElementById("hourglass").src = GIF;
 		}
