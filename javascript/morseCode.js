@@ -5,6 +5,9 @@ let clear  = document.getElementById("clear");  // button to clear all morse cod
 let light  = document.getElementById("light");  // shows whether morse code is being inputted
 let words  = document.getElementById("letter"); // text output of morse code in english
 let show   = document.getElementById("show");   // toggle between showing output and not
+let slower = document.getElementById("slower");
+let faster = document.getElementById("faster");
+let dot = 100; // change to toggle translate rate
 
 // audio file for the morse code beep   
 let audio  = new Audio("../util/beep.wav");
@@ -15,6 +18,20 @@ let spaceTimer;      // how much time between input
 let elapsed;         // how long paddle is pressed
 let start;           // start of when paddle is pressed
 let guess;           // morse code to translate
+
+// slow down translate rate but only to 1 second
+slower.addEventListener("click", function(){
+  if(dot < 1000){
+    dot += 100;
+  }
+});
+
+// speed up translate rate but only to 100 milliseconds
+faster.addEventListener("click", function(){
+  if(dot >= 110){
+    dot -= 100;
+  }
+});
 
 // shows or hides morse code
 show.addEventListener("click", function(){
@@ -46,7 +63,6 @@ paddle.addEventListener("keydown", function(event){
 
 // key up, stops buzzer
 paddle.addEventListener("keyup", function(event){
-  let dot = 100; // change to toggle translate rate
   if(event.keyCode === 32){ // spacebar pressed
     audio.pause();
     isPlaying = false;
