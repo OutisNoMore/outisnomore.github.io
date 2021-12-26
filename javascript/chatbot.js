@@ -88,8 +88,8 @@ async function makeSound(sequence){
 
 function fetchBuffer(){
   return Promise.all([
-    '../dot.wav',
-    '../dash05.wav'
+    '../util/dot.wav',
+    '../util/dash05.wav'
   ].map(url => fetch(url)
    .then(response => response.arrayBuffer())
    .then(buffer => context.decodeAudioData(buffer))

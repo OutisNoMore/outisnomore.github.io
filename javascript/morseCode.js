@@ -6,7 +6,7 @@ let light  = document.getElementById("light");
 let words  = document.getElementById("letter");
 let show   = document.getElementById("show");
 //audio file for the morse code beep
-let audio  = new Audio("../beep.wav");
+let audio  = new Audio("../util/beep.wav");
 //global variables for this program
 let timeElapsed = 0;
 let spaceTimer;
