@@ -1,13 +1,19 @@
 // Event handlers from index.html
-let paddle = document.getElementById("timer");  // paddle to input morse code - space bar
-let output = document.getElementById("output"); // text output of morse code - dots and dashes
-let clear  = document.getElementById("clear");  // button to clear all morse code
-let light  = document.getElementById("light");  // shows whether morse code is being inputted
-let words  = document.getElementById("letter"); // text output of morse code in english
-let show   = document.getElementById("show");   // toggle between showing output and not
-let slower = document.getElementById("slower");
-let faster = document.getElementById("faster");
-let dot = 100; // change to toggle translate rate
+let paddle  = document.getElementById("timer");   // paddle to input morse code - space bar
+let output  = document.getElementById("output");  // text output of morse code - dots and dashes
+let clear   = document.getElementById("clear");   // button to clear all morse code
+let light   = document.getElementById("light");   // shows whether morse code is being inputted
+let words   = document.getElementById("letter");  // text output of morse code in english
+let show    = document.getElementById("show");    // toggle between showing output and not
+let slower  = document.getElementById("slower");  // slow down translation
+let faster  = document.getElementById("faster");  // speed up translation
+let wpmSlow = document.getElementById("WPMSlow"); // slow down wpm
+let wpmFast = document.getElementById("WPMFast"); //speed up wpm
+let speed = document.getElementById("speed");     // display speed
+
+let dot    = 200; // change to toggle translate rate
+let word   = 120; // time between words
+let letter = 60;  // time between letters
 
 // audio file for the morse code beep   
 let audio  = new Audio("../util/beep.wav");
@@ -20,17 +26,37 @@ let start;           // start of when paddle is pressed
 let guess;           // morse code to translate
 
 // slow down translate rate but only to 1 second
-slower.addEventListener("click", function(){
-  if(dot < 1000){
-    dot += 100;
+wpmSlow.addEventListener("click", function(){
+  if(word < 1000){
+    word   += 40;
+    letter += 20;
   }
 });
 
 // speed up translate rate but only to 100 milliseconds
+wpmFast.addEventListener("click", function(){
+  if(word >= 160){
+    word   -= 40;
+    letter -= 20;
+  }
+  speed.innerHTML = dot;
+});
+
+
+// slow down translate rate but only to 1 second
+slower.addEventListener("click", function(){
+  if(dot < 1000){
+    dot += 100;
+  }
+  speed.innerHTML = dot;
+});
+
+// speed up translate rate but only to 100 milliseconds
 faster.addEventListener("click", function(){
-  if(dot >= 110){
+  if(dot >= 200){
     dot -= 100;
   }
+  speed.innerHTML = dot;
 });
 
 // shows or hides morse code
@@ -96,14 +122,12 @@ clear.addEventListener("click", function(){
 // starts timer for how long key not pressed
 // change word/letter to change wpm rate
 function startTimer(){
-  let word   = 100;
-  let letter = 40;
   spaceTimer = setInterval(function(){
     timeElapsed++;
-    if(timeElapsed > word){ // more than 300 milliseconds is a space or end of a word 
+    if(timeElapsed > word){ // end of a word 
       words.innerHTML += " ";
       stopTimer();
-    }else if(timeElapsed > letter){ // more than 100 milliseconds is end of a letter
+    }else if(timeElapsed > letter){ // end of a letter
       output.innerHTML += " ";
       translate();
     }
