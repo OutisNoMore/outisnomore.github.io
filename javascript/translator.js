@@ -1,27 +1,28 @@
+// hashmap of morse code to english
 let morseToLet = {
-  ".-": "a",
+  ".-"  : "a",
   "-...": "b",
   "-.-.": "c",
-  "-..": "d",
-  ".": "e",
+  "-.." : "d",
+  "."   : "e",
   "..-.": "f",
-  "--.": "g",
+  "--." : "g",
   "....": "h",
-  "..": "i",
+  ".."  : "i",
   ".---": "j",
-  "-.-": "k",
+  "-.-" : "k",
   ".-..": "l",
-  "--": "m",
-  "-.": "n",
-  "---": "o",
+  "--"  : "m",
+  "-."  : "n",
+  "---" : "o",
   ".--.": "p",
   "--.-": "q",
-  ".-.": "r",
-  "...": "s",
-  "-": "t",
-  "..-": "u",
+  ".-." : "r",
+  "..." : "s",
+  "-"   : "t",
+  "..-" : "u",
   "...-": "v",
-  ".--": "w",
+  ".--" : "w",
   "-..-": "x",
   "-.--": "y",
   "--..": "z",
@@ -38,9 +39,10 @@ let morseToLet = {
   "..--..": "?",
   ".-.-.-": ".",
   "-.-.--": "!",
-  " ": " "
+  " "     : " "
 }
 
+// translate letter to morse code
 function revTranslate(letter){
   let output = "";
 
@@ -53,6 +55,7 @@ function revTranslate(letter){
   return output + " ";
 }
 
+// translate morse code to oletter
 function translate(){
   let index = output.innerHTML.indexOf(" ");
   let morseCode = output.innerHTML.substring(0, index);

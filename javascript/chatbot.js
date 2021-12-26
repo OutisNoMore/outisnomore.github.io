@@ -1,9 +1,13 @@
-let send = document.getElementById("send");
-let res = document.getElementById("response");
-let talking = false;
+let send    = document.getElementById("send");                  // button to send to api
+let res     = document.getElementById("response");              // display output of chatbot
+let api     = 'https://account.snatchbot.me/channels/api/api/'; // api for chatbot
+let id      = 'id150028';                                       // api id
+let key     = 'app1234';                                        // api key
+let talking = false;                                            // status of chatbot
 
-let wait;
+let wait; // wait while sending data
 
+// send request to api and get response
 send.addEventListener("click", function(){
   if(words.innerHTML.length === 0 || talking){
     return;
@@ -43,6 +47,7 @@ send.addEventListener("click", function(){
     });
 });
 
+// translate api response to morse code
 function toMorse(sequence){
   let morse = "";
   sequence.split('').forEach(letter => {
@@ -52,6 +57,7 @@ function toMorse(sequence){
   makeSound(morse);
 }
 
+// show output one letter at a time
 function typeEffect(words){
   res.innerHTML = "";
   let i = 0;
@@ -64,28 +70,29 @@ function typeEffect(words){
   }, 250);
 }
 
-const context = new (window.AudioContext || window.webkitAudioContext)();
+const context = new (window.AudioContext || window.webkitAudioContext)(); // sound drivers
 
+// make corresponding morse code dots and dash sound
 async function makeSound(sequence){
   const [dot, dash] = await fetchBuffer();
   let time = 0;
   sequence.split('').forEach(type => {
     if(type === ' '){
-      time += 0.3;//wait 300 milliseconds after every letter
+      time += 0.3;// wait 300 milliseconds after every letter - change for faster or slower
       return;
     }
     let test = context.createBufferSource();
     test.buffer = type === '-' ? dash : dot;
     test.connect(context.destination);
     test.start(context.currentTime + time);
-    time += test.buffer.duration + 0.03;//makes sure order is synchronous with 30 millisecond gap
+    time += test.buffer.duration + 0.03;// makes sure order is synchronous with 30 millisecond gap between letters
   });
   setTimeout(function(){
     talking = false;
   }, time*1000);
 }
 
-
+// fetch sound utilities - beeps
 function fetchBuffer(){
   return Promise.all([
     '../util/dot.wav',

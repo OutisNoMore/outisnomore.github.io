@@ -1,20 +1,22 @@
-//Event handlers from index.html
-let paddle = document.getElementById("timer");
-let output = document.getElementById("output");
-let clear  = document.getElementById("clear");
-let light  = document.getElementById("light");
-let words  = document.getElementById("letter");
-let show   = document.getElementById("show");
-//audio file for the morse code beep
-let audio  = new Audio("../util/beep.wav");
-//global variables for this program
-let timeElapsed = 0;
-let spaceTimer;
-let elapsed;
-let start;
-let guess;
+// Event handlers from index.html
+let paddle = document.getElementById("timer");  // paddle to input morse code - space bar
+let output = document.getElementById("output"); // text output of morse code - dots and dashes
+let clear  = document.getElementById("clear");  // button to clear all morse code
+let light  = document.getElementById("light");  // shows whether morse code is being inputted
+let words  = document.getElementById("letter"); // text output of morse code in english
+let show   = document.getElementById("show");   // toggle between showing output and not
 
-//shows or hides morse 
+// audio file for the morse code beep   
+let audio  = new Audio("../util/beep.wav");
+
+// global variables for this program
+let timeElapsed = 0; // how long is the paddle pressed
+let spaceTimer;      // how much time between input
+let elapsed;         // how long paddle is pressed
+let start;           // start of when paddle is pressed
+let guess;           // morse code to translate
+
+// shows or hides morse code
 show.addEventListener("click", function(){
   if(words.style.display === "none"){ //if text is displayed, get rid of text
     words.style.display = "block";
@@ -29,7 +31,7 @@ show.addEventListener("click", function(){
 });
 
 let isPlaying = false;
-//keydown starts buzzer
+// keydown starts buzzer
 paddle.addEventListener("keydown", function(event){
   if(event.keyCode === 32){//spacebar pressed
     if(!isPlaying){
@@ -42,14 +44,15 @@ paddle.addEventListener("keydown", function(event){
   }
 });
 
-//key up, stops buzzer
+// key up, stops buzzer
 paddle.addEventListener("keyup", function(event){
-  if(event.keyCode === 32){//spacebar pressed
+  let dot = 100; // change to toggle translate rate
+  if(event.keyCode === 32){ // spacebar pressed
     audio.pause();
     isPlaying = false;
     light.style.color = "black";
     elapsed = Date.now() - start;
-    if(elapsed < 100){
+    if(elapsed < dot){
       output.innerHTML += ".";
     }
     else{
@@ -59,7 +62,7 @@ paddle.addEventListener("keyup", function(event){
   }
 });
 
-//delete one character 
+// delete one character 
 paddle.addEventListener("keydown", function(event){
   if(event.keyCode === 8){//backspace bar
     let letters = words.innerHTML;
@@ -67,27 +70,31 @@ paddle.addEventListener("keydown", function(event){
   }
 });
 
-//clear button, deletes all output 
+// clear button, deletes all output 
 clear.addEventListener("click", function(){
   output.innerHTML = "";
   words.innerHTML = "";
   stopTimer();
 });
-//starts timer for how long key not pressed
+
+// starts timer for how long key not pressed
+// change word/letter to change wpm rate
 function startTimer(){
+  let word   = 100;
+  let letter = 40;
   spaceTimer = setInterval(function(){
     timeElapsed++;
-    if(timeElapsed > 100){ //more than 300 milliseconds is a space or end of a word
+    if(timeElapsed > word){ // more than 300 milliseconds is a space or end of a word 
       words.innerHTML += " ";
       stopTimer();
-    }else if(timeElapsed > 40){ //more than 100 milliseconds is end of a letter
+    }else if(timeElapsed > letter){ // more than 100 milliseconds is end of a letter
       output.innerHTML += " ";
       translate();
     }
   }, 1);
 }
 
-//stops timer for show long key is not pressed
+// stops timer for how long key is not pressed
 function stopTimer(){
   clearInterval(spaceTimer);
   timeElapsed = 0;
