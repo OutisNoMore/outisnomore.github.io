@@ -1,8 +1,9 @@
 let send    = document.getElementById("send");                  // button to send to api
 let res     = document.getElementById("response");              // display output of chatbot
 let api     = 'https://account.snatchbot.me/channels/api/api/'; // api for chatbot
-let id      = 'id150028';                                       // api id
-let key     = 'app1234';                                        // api key
+let id      = 'id222870';                                       // api id
+let key     = 'appapp1234';                                     // api key
+let passwd  = 'apspasswd';                                      // api password
 let talking = false;                                            // status of chatbot
 
 let wait; // wait while sending data
@@ -20,6 +21,7 @@ send.addEventListener("click", function(){
     }
     res.innerHTML += "*";
   }, 500);
+//  let query = api + "/" + id + "/" + key + "/" + passwd + "?user_id=0";
   let query = 'https://account.snatchbot.me/channels/api/api/id222870/appapp1234/apspasswd?user_id=0';
 //  let query = 'https://account.snatchbot.me/channels/api/api/id150028/app1234/apsmorse?user_id=0';
   let data = { message: words.innerHTML };
@@ -68,7 +70,7 @@ function typeEffect(words){
     }
     res.innerHTML += words.substring(i, i+1);
     i++;
-  }, 250);
+  },500);
 }
 
 const context = new (window.AudioContext || window.webkitAudioContext)(); // sound drivers
