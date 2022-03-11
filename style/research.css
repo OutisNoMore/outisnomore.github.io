@@ -1,0 +1,48 @@
+html{
+  font-size: 25px;
+  font-family: "Times New Roman";
+}
+
+h1{
+  font-size: 60px;
+  text-align: center;
+  margin: 0;
+  padding: 20px 0;
+}
+
+h2{
+  font-size: 30px;
+  padding: 0 30px 20px;
+}
+
+p{
+  font-size: 16px;
+  padding: 0 30px 20px;
+  line-height: 2;
+  letter-spacing: 1px;
+}
+
+body{
+  padding: 50px 80px 50px;
+}
+
+#toc_container {
+    background: #f9f9f9 none repeat scroll 0 0;
+    border: 1px solid #aaa;
+    display: table;
+    font-size: 95%;
+    padding: 20px;
+    margin-bottom: 1em;
+    width: auto;
+}
+
+.toc_title {
+    font-weight: 700;
+    text-align: center;
+}
+
+#toc_container li, #toc_container ul, #toc_container ul li{
+    font-size: 16px;
+    list-style: outside none none !important;
+    padding: 0px 10px 5px 10px !important;
+}
