@@ -21,8 +21,9 @@ table, th, td{
 }
 
 img{
-  width: 42px;
-  height: 42px;
+  margin: auto;
+  width: 60px;
+  height: 60px;
 }
 
 .body{
