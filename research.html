@@ -12,7 +12,7 @@
   <body>
     <h1>Differential Equations and Edge Detection</h1>
     <p>
-      This is an abstract and table of contents showing what we will talk about
+        Differential equations have a wide variety of applications. This project focuses on the application of derivatives on edge detection algorithms. Some of the most common edge detection algorithms use first order and second order derivatives on images to create a map of edges. Algorithms that will be discussed in this research are Sobel, Prewitt, Laplacian, and an application of these using Canny Edge Detection.
     </p>
     <div id="toc_container">
       <p class="toc_title">Contents</p>
@@ -37,11 +37,12 @@
             <li>3.1 <a href="#recognition">Object Recognition and Detection</a></li>
           </ul>
         <li>4. <a href="#example">Example</a></li>
+        <li>5. <a href="#reference">References</a></li>
       </ul>
     </div>
     <a id="background"><h2>Background</h2></a>
       <p>
-        This will introduce the background knowledge and concepts used in this paper. Topics that will be discussed include: Convolution, vector, gradient, intensity, and more.
+        Before we begin talking in depth of the algorithms, we will first explore some basic background knowledge required to understand the concepts used in this project. Specifically, we will go over how images can be represented as a 2 dimensional vector space, how the intensity of colors can be calculated and a gradient vector found based on the intensities to find the edges.
       </p>
     <a id="intensity"><h2>Image Intensity</h2></a>
       <p>
@@ -49,7 +50,7 @@
       </p>
     <a id="vectors"><h2>Images as a Vector Space</h2></a>
       <p>
-        vectors!
+        Images are commonly stored as a 2 Dimensional area of pixels. These pixels are made of a linear combination of red, green, blue components which can be used to express different colors. For each pixel, there are 8 surrounding neighbor pixels (North, North East, East, South East, South, South West, West, and North West). In each direction we can calculate a scalar quantity from the pixel - either an RGB value or intensity. In otherwords, we have both a direction, and magnitude - the basis for a vector. If we extend that principle to the whole area of pixels, can think of the Image as a 2D vectorspace. Furthermore, we can represent this image as a 2D matrix. Now we can perform operations such as finding the gradient vector at a certain point, or perform convolution between the image matrix and another operator matrix. First, let us consider matrix convolution on images.
       </p>
     <a id="gradient"><h2>Gradient Vectors</h2></a>
       <p>
@@ -57,39 +58,43 @@
       </p>
     <a id="convolution"><h2>Matrix Convolution</h2></a>
       <p>
-        Convolution
+        Matrix convolution involves the multiplication of a matrix against another matrix. In this case we are specifically
       </p>
     <a id="edges"><h2>Edge Detection Algorithms</h2></a>
       <p>
-        Edges
+        Now that we got the basics out of the way, we can discuss some applications.
       </p>
     <a id="prewitt"><h2>Prewitt Edge Detection</h2></a>
       <p>
-        Prewitt
+        The Prewitt operator was developed in 19?? by Prewitt. It is one of the more basic forms of edge detection, and involves the convolution of a pure first derivative operator on an image. There are two operators - one in the x direction and in the y direction. As you can see, when the convolution is executed, pixels in both x and y directions will be subtracted to their respective opposite. This will give you the difference in intensity at each pixel. 
       </p>
     <a id="sobel"><h2>Sobel Edge Detection</h2></a>
       <p>
-        Sobel
+        While the Prewitt operator will give you a map of all the differences, it does not handle noise very well. The Prewitt operator is prone to returning false edges resulting in an inaccurate map. To avoid this issue, Sobel developed an upgraded version of the Prewitt operator. Instead of taking the pure derivative of the pixels, Sobel weighted the neighbors to the East and West, and North and South directions by a factor of 2. This can be thought of as blurring the pixels in the corner while still taking them into account. As a result, noise is reduced and a more accurate edge map can be developed.
       </p>
     <a id="laplacian"><h2>Laplacian Edge Detection</h2></a>
       <p>
-        Laplacian
+        The Laplacian operator uses second order derivatives to generate the edge map.
       </p>
     <a id="canny"><h2>Canny Edge Detection</h2></a>
       <p>
-        Canny
+        The Canny Edge Detection algorithm builds on the Sobel operator to produce a better map of edges. Once an initial map of edges from the Sobel operator is formed, the edges are thinned through a non-maximum suppression algorithm. Then the through double thresholding, some edges are filtered out. Finally, weak edges that lie between the low and high thresholds are either filtered or highlighted based on its surrounding pixels through hysteresis thresholding. The final result is a clear map of edges.
       </p>
-    <a id="Applications"><h2>Applications of Edge Detection</h2></a>
+    <a id="applications"><h2>Applications of Edge Detection</h2></a>
       <p>
-        Applications 
+        Using derivatives to calculate the edges in an image is an important first step to many applications of computer vision. Some common uses can be found in object recognition and detection, character processing, and image restoration or inpainting.
       </p>
     <a id="recognition"><h2>Object Recognition and Detection</h2></a>
       <p>
-        Objects!
+        Object recognition and detection is a popular and growing field of computer vision. Many digital cameras use face detection algorithms to focus on and track faces when taking a picture. Some businesses like Tesla are experimenting on using object detection and recognition to develop self driving cars. Often, the first step in these algorithms are to generate the edges in the image. 
       </p>
     <a id="example"><h2>Example implementations of edge detection</h2></a>
       <p>
         <a href="https://outisnomore.github.io/image-processing">Go here for a samples</a>
+      </p>
+    <a id="reference"><h2>References</h2></a>
+      <p>
+        References
       </p>
   </body>
 </html>
