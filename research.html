@@ -50,11 +50,11 @@
       </p>
     <a id="vectors"><h2>Images as a Vector Space</h2></a>
       <p>
-        Images are commonly stored as a 2 Dimensional area of pixels. These pixels are made of a linear combination of red, green, blue components which can be used to express different colors. For each pixel, there are 8 surrounding neighbor pixels (North, North East, East, South East, South, South West, West, and North West). In each direction we can calculate a scalar quantity from the pixel - either an RGB value or intensity. In otherwords, we have both a direction, and magnitude - the basis for a vector. If we extend that principle to the whole area of pixels, can think of the Image as a 2D vectorspace. Furthermore, we can represent this image as a 2D matrix. Now we can perform operations such as finding the gradient vector at a certain point, or perform convolution between the image matrix and another operator matrix. First, let us consider matrix convolution on images.
+      Images are commonly stored as an array of pixels<sup>[<a href="#reference">1</a>]</sup>. These pixels are made of a linear combination of red, green, blue components which can be used to express different colors. Although on software they can be stored as a 1 dimensional array, in real life these arrays represent a 2 dimensional image. For each pixel, there are 8 surrounding neighbor pixels (North, North East, East, South East, South, South West, West, and North West). In each direction we can calculate a scalar quantity from the pixel - either an RGB value or intensity. In otherwords, we have both a direction, and magnitude - the basis for a vector. If we extend that principle to the whole area of pixels, can think of the Image as a 2D vectorspace. Furthermore, we can represent this image as a 2D matrix. Note, however, that this matrix will be very large - images are often a few thousands pixels wide by a few thousand pixels long, resulting in a number of pixels to the order of millions. Now we can perform operations such as finding the gradient vector at a certain point, or perform convolution between the image matrix and another operator matrix. Let us first consider finding the gradient of a matrix.
       </p>
     <a id="gradient"><h2>Gradient Vectors</h2></a>
       <p>
-        Gradient
+        The gradient vector is similar to the derivative of a vector. 
       </p>
     <a id="convolution"><h2>Matrix Convolution</h2></a>
       <p>
