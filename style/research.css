@@ -46,3 +46,8 @@ body{
     list-style: outside none none !important;
     padding: 0px 10px 5px 10px !important;
 }
+
+#references li, #references ul, #references ul li{
+  font-size: 20px;
+  list-style: outside none none !important;
+}

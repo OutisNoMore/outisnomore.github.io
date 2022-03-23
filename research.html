@@ -42,7 +42,7 @@
     </div>
     <a id="background"><h2>Background</h2></a>
       <p>
-        Before we begin talking in depth of the algorithms, we will first explore some basic background knowledge required to understand the concepts used in this project. Specifically, we will go over how images can be represented as a 2 dimensional vector space, how the intensity of colors can be calculated and a gradient vector found based on the intensities to find the edges.
+        Before we begin talking in depth about the edge detection algorithms, we will first explore some basic background knowledge required to understand the concepts used in this project. Specifically, we will go over how images can be represented as a 2 dimensional vector space, how the intensity of colors can be calculated and a gradient vector found based on the intensities to find the edges.
       </p>
     <a id="intensity"><h2>Image Intensity</h2></a>
       <p>
@@ -50,7 +50,7 @@
       </p>
     <a id="vectors"><h2>Images as a Vector Space</h2></a>
       <p>
-      Images are commonly stored as an array of pixels<sup>[<a href="#reference">1</a>]</sup>. These pixels are made of a linear combination of red, green, blue components which can be used to express different colors. Although on software they can be stored as a 1 dimensional array, in real life these arrays represent a 2 dimensional image. For each pixel, there are 8 surrounding neighbor pixels (North, North East, East, South East, South, South West, West, and North West). In each direction we can calculate a scalar quantity from the pixel - either an RGB value or intensity. In otherwords, we have both a direction, and magnitude - the basis for a vector. If we extend that principle to the whole area of pixels, can think of the Image as a 2D vectorspace. Furthermore, we can represent this image as a 2D matrix. Note, however, that this matrix will be very large - images are often a few thousands pixels wide by a few thousand pixels long, resulting in a number of pixels to the order of millions. Now we can perform operations such as finding the gradient vector at a certain point, or perform convolution between the image matrix and another operator matrix. Let us first consider finding the gradient of a matrix.
+      Images are commonly stored as an array of pixels<sup>[<a href="#first">1</a>]</sup>. These pixels are made of a linear combination of red, green, blue components which can be used to express different colors. Although on software they can be stored as a 1 dimensional array, in real life these arrays represent a 2 dimensional image. For each pixel, there are 8 surrounding neighbor pixels (North, North East, East, South East, South, South West, West, and North West). In each direction we can calculate a scalar quantity from the pixel - either an RGB value or its corresponding intensity. In otherwords, we have both a direction, and magnitude - the basis for a vector. If we extend that principle to the whole area of pixels, can think of the Image as a 2D vectorspace. Furthermore, we can represent this image as a 2D matrix. Note, however, that this matrix will be very large - images are often a few thousands pixels wide by a few thousand pixels long, resulting in a total number of pixels to the order of millions. Now we can perform operations such as finding the gradient vector at a certain point, or perform convolution between the image matrix and another operator matrix. Let us first consider finding the gradient of a matrix.
       </p>
     <a id="gradient"><h2>Gradient Vectors</h2></a>
       <p>
@@ -58,7 +58,7 @@
       </p>
     <a id="convolution"><h2>Matrix Convolution</h2></a>
       <p>
-        Matrix convolution involves the multiplication of a matrix against another matrix. In this case we are specifically
+        Matrix convolution involves the multiplication of a matrix against another matrix. In this case we use special operators that can be multiplied across the whole image matrix to calculate the gradient vectors of the image.
       </p>
     <a id="edges"><h2>Edge Detection Algorithms</h2></a>
       <p>
@@ -90,11 +90,16 @@
       </p>
     <a id="example"><h2>Example implementations of edge detection</h2></a>
       <p>
-        <a href="https://outisnomore.github.io/image-processing">Go here for a samples</a>
+        <a href="https://outisnomore.github.io/image-processing">Go here for a sample implementation</a>
       </p>
     <a id="reference"><h2>References</h2></a>
-      <p>
-        References
-      </p>
+    <div id="references">
+      <ul class="reference_list">
+        <li>1. <a id="first" href="https://homepages.inf.ed.ac.uk/rbf/HIPR2/sobel.htm">Sobel Edge Detector</a></li>
+        <li>2. <a id="second" href="https://cse.usf.edu/~r1k/MachineVisionBook/MachineVision.files/MachineVision_Chapter5.pdf">Edge Detection</a></li>
+        <li>3. <a id="third" href="https://cse442-17f.github.io/Sobel-Laplacian-and-Canny-Edge-Detection-Algorithms/">Stepping into the Filter</a></li>
+        <li>4. <a id="fourth" href="https://cg.ivd.kit.edu/downloads/assignment3_GPUC.pdf">Image Convolution</a></li>
+      </ul>
+    </div>
   </body>
 </html>
