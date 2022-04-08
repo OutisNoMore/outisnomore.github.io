@@ -69,7 +69,10 @@
       <p class="text">
         The gradient vector is similar to the derivative of a vector. In the case of images we are working with a 2-Dimensional space, so we can think of the gradient vector in terms of x and y. 
         \[ \vec{\nabla}f(x, y) = \langle{\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}}\rangle \]
-        This is our first use of differential equations with images, so it is worth our time to delve a bit further.
+        This is our first use of differential equations with images, so it is worth our time to delve a bit further. In essence edge detection requires us to find the difference in intensity between a pixel and its surrounding neighbor pixels. The gradient vector allows to do just that on an image, which is why it is of much importance to us. However, the equation introduced above models the gradient vector on a continuouos space - whereas on computers images are stored as a discrete 2-Dimensional collection of pixels. Thus a separate equation must be considered for the discrete case.
+        \[ \frac{\partial f}{\partial x} = \frac{I(x + 1, y) - I(x - 1, y)}{2} \]
+        \[\frac{\partial f}{\partial y} = \frac{I(x, y + 1) - I(x, y - 1)}{2} \]
+        I represents the 2-D image matrix, and the (x, y) refer to the pixel located at the point (x, y) on the image. Once the gradient vector is determined, some other properties can also be calculated. 
       </p>
     </div>
     <div class="Paper" id="Convolution">
