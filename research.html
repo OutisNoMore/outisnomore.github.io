@@ -72,13 +72,15 @@
         This is our first use of differential equations with images, so it is worth our time to delve a bit further. In essence edge detection requires us to find the difference in intensity between a pixel and its surrounding neighbor pixels. The gradient vector allows to do just that on an image, which is why it is of much importance to us. However, the equation introduced above models the gradient vector on a continuouos space - whereas on computers images are stored as a discrete 2-Dimensional collection of pixels. Thus a separate equation must be considered for the discrete case.
         \[ \frac{\partial f}{\partial x} = \frac{I(x + 1, y) - I(x - 1, y)}{2} \]
         \[\frac{\partial f}{\partial y} = \frac{I(x, y + 1) - I(x, y - 1)}{2} \]
-        I represents the 2-D image matrix, and the (x, y) refer to the pixel located at the point (x, y) on the image. Once the gradient vector is determined, some other properties can also be calculated. 
+        I represents the 2-D image matrix, and the (x, y) refer to the pixel located at the point (x, y) on the image. Once the gradient vector is determined, some other properties can also be calculated. Specifically, the magnitude and angle of the gradient can be calculated. Because the gradient is essentially a derivative, its magnitude quantifies how quickly the image is changing at that point<sup>[<a href="#seventh">7</a>]</sup>. In other words, the magnitude is a measure of how strong or defined an edge is compared with its neighboring pixels. The angle of the gradient will be normal to the edge, and so it can be used to calculate the direction of the edge.
+        Magnitude: \[ \| \mathbf{G} \| = \sqrt{{G_x}^2 + {G_y}^2} \]
+        Angle: \[ \theta = \frac{G_y}{G_x} \]
       </p>
     </div>
     <div class="Paper" id="Convolution">
       <a id="convolution"><h2>Matrix Convolution</h2></a>
       <p class="text">
-        Matrix convolution involves the multiplication of a matrix against another matrix<sup>[<a href="#second">2</a>]</sup>. In this case we use special operators that can be multiplied across the whole image matrix to calculate the gradient vectors of the image.
+        Matrix convolution involves the multiplication of a matrix against another matrix<sup>[<a href="#second">2</a>]</sup>. In this case we use special operators that can be multiplied across the whole image matrix to calculate the gradient vectors of the image. One of the main problems to consider when conducting convolution with matrices, are the edges. Let's say a 3x3 square matrix serves as an operator for matrix convolution with a larger 100x100 matrix. Along the edges there may not be any values to multiply with. This can be accounted for in a couple of different ways. One method is to pad the edges of the 100x100 matrix with a border of zeroes one pixel deep. This would allow for convolution against the edges of the matrix, while not changing the overall values. Another way to handle this is to not start from the edge. This would result in a smaller size matrix, but the data will be accurate. This project uses the first method, and pads matrices before convolution.
       </p>
     </div>
     <div class="Paper" id="Edges">
@@ -109,7 +111,7 @@
     <div class="Paper" id="Canny">
       <a id="canny"><h2>Canny Edge Detection</h2></a>
       <p class="text">
-      The Canny Edge Detection algorithm builds on the Sobel operator to produce a better map of edges. Once an initial map of edges using the Sobel operator is formed, the edges are thinned through a non-maximum suppression algorithm. This algorithm only keeps the strongest edge and ignores all other weaker edges. Then through double thresholding, edges that are weaker than the lower threshold are filtered out while edges that are stronger than the higher threshold are highlighted. Finally, the edges that lie between the low and high thresholds are either filtered out or highlighted based on its surrounding pixels through hysteresis thresholding. In short, if a weak edge is connected to a strong edge then it is highlighted, and ignored otherwise.<sup>[<a href="third">3</a>]</sup> The final result is a clear map of edges.
+      The Canny Edge Detection algorithm builds on the Sobel operator to produce a better map of edges. Once an initial map of edges using the Sobel operator is formed, the edges are thinned through a non-maximum suppression algorithm. This algorithm only keeps the strongest edge and ignores all other weaker edges. Then through double thresholding, edges that are weaker than the lower threshold are filtered out while edges that are stronger than the higher threshold are highlighted. Finally, the edges that lie between the low and high thresholds are either filtered out or highlighted based on its surrounding pixels through hysteresis thresholding. In short, if a weak edge is connected to a strong edge then it is highlighted, and ignored otherwise.<sup>[<a href="#third">3</a>]</sup> The final result is a clear map of edges.
       </p>
     </div>
     <div class="Paper" id="Applications">
@@ -139,6 +141,7 @@
         <li>4. <a id="fourth" href="https://homepages.inf.ed.ac.uk/rbf/HIPR2/sobel.htm">Sobel Edge Detector</a></li>
         <li>5. <a id="fifth" href="https://cse442-17f.github.io/Sobel-Laplacian-and-Canny-Edge-Detection-Algorithms/">Stepping into the Filter</a></li>
         <li>6. <a id="sixth" href="https://www.w3.org/TR/AERT/#color-contrast">Techniques For Accessibility Evaluation And Repair Tools</a></li>
+        <li>7. <a id="seventh" href="https://www.cs.umd.edu/~djacobs/CMSC426/ImageGradients.pdf">Image Gradients</a></li>
       </ul>
     </div>
   </body>
