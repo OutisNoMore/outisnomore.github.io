@@ -96,7 +96,7 @@
       <a id="prewitt"><h2>Prewitt Edge Detection</h2></a>
       <div class="text">
         The Prewitt operator was developed in 1970 by John Prewitt<sup>[<a href="#sixth">8</a>]</sup>. It is one of the more basic forms of edge detection, and involves the convolution of a pure first derivative operator on an image. There are two operators - one in the x direction and in the y direction. The matrix in the x direction is shown below, the y direction matrix would be the transpose of this one. As you can see, when the convolution is executed, pixels in the x or y directions will be subtracted to their respective opposite. This will give you the difference in intensity at each pixel. This is essentially a pure discrete representation of the gradient vector on the image. 
-        <p class="footer">Prewitt Operator</p>
+        <p class="footer">Prewitt Operator in the X direction</p>
         <div class="Operator">
           <div>-1</div>
           <div>0</div>
@@ -114,7 +114,7 @@
       <a id="sobel"><h2>Sobel Edge Detection</h2></a>
       <div class="text">
         While the Prewitt operator will give you a map of all the differences, it does not handle noise very well. The Prewitt operator is prone to returning false edges resulting in an inaccurate map. To avoid this issue, the Sobel-Feldman operator is commonly used instead. Researchers Irwin Sobel, and Gary Feldman introduced this operator as part of a talk in a larger convention in 1968<sup>[<a href="#seventh">9</a>]</sup>. Instead of taking the pure derivative of the pixels, Sobel weighted the neighbors to the East and West, and North and South directions by a factor of 2. As a result, the intensities of the pixels along the corners are not as important in the final result. Another way of thinking of this is that we are blurring the pixels in the corner while still taking them into account. As a result, noise is reduced and a more accurate edge map can be developed.
-        <p class="footer">Sobel Operator</p>
+        <p class="footer">Sobel Operator in the X direction</p>
         <div class="Operator">
           <div>-1</div>
           <div>0</div>
@@ -184,7 +184,7 @@
           <p id="third">Jain, Ramesh, et al. <cite>Machine Vision.</cite> McGraw-Hill, 1995.</p>
         </li>
         <li>
-          <p id="fourth">Chrishold, Wendy, and Ridpath, Chris. %quotTechniques for Accessibility Evaluation and Repair Tools.&quot <cite>W3C</cite> www.w3.org/TR/AERT/#color-contrast. Accessed 10 April 2022.</p>
+          <p id="fourth">Chrishold, Wendy, and Ridpath, Chris. &quotTechniques for Accessibility Evaluation and Repair Tools.&quot <cite>W3C</cite> www.w3.org/TR/AERT/#color-contrast. Accessed 10 April 2022.</p>
         </li>
         <li>
           <p id="fifth"> Jacobs, David. &quotImage Gradients.&quot www.cs.umd.edu/~djacobs/CMSC426/ImageGradients.pdf. Accessed 9 April 2022.</p>
