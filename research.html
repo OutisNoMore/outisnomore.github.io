@@ -11,9 +11,9 @@
   </head>
   <body>
     <h1>Differential Equations and Edge Detection</h1>
-    <p>
+    <div class="text">
         Differential equations have a wide variety of applications. This project focuses on the application of derivatives on edge detection algorithms. Some of the most common edge detection algorithms use first order and second order derivatives on images to create a map of edges. We will be going into how these edge detection algorithms implement differential equations to calculate the edges of an image. The algorithms that will be discussed in this project are Sobel, Prewitt, Laplacian, and an application of these using Canny Edge Detection.
-    </p>
+    </div>
     <div id="toc_container">
       <p class="toc_title">Contents</p>
       <ul class="toc_list">
@@ -48,52 +48,55 @@
     </div>
     <div class="Paper" id="Intensity">
       <a id="intensity"><h2>Image Intensity</h2></a>
-      <p class="text">
+      <div class="text">
         On a computer, images are represented as a discrete collection of pixels. These pixels represent a linear combination of Red, Green, and Blue values which can be used to produce different colors. However, when processing an image, especially for edges, it is often inefficient and not very useful to process all three values for each pixel. This is because even small images can often consist of at least tens of thousands of pixels; larger images can be made of millions of individual pixels. Processing three different value over potentially millions of pixels could end up being very costly and slow. As a result, the intensity of the image is often calculated and used instead. Although the exact definition for the intensity of a color can be a bit complex, for our purposes it suffices to think of it as the brightness of an color<sup>[<a href="#first">1</a>]</sup>. There are multiple ways of calculating this value, listed below: 
+        <p class="footer">Average intensities of each red green blue value<sup>[<a href="#third">3</a>]</sup></p>
         \[ \frac{red + green + blue}{3} \]
-        Average intensities of each red green blue value<sup>[<a href="#third">3</a>]</sup>
+        <p class="footer">Formula for Luminance<sup>[<a href="#fourth">6</a>]</sup></p>
         \[ 0.299*red + 0.587*green + 0.114*blue \]
-        Formula for Luminance<sup>[<a href="#sixth">6</a>]</sup>
         <br>
         These formulas result in a single value based on the amount of red, green, or blue the pixel has. The result is a shade of gray of the original image - another way to think of it is that all color data has been stripped and replaced with a single value of how bright the pixel is. This will improve processing time and efficiency while still being able to detect changes between pixels. However, there is still the issue of the loss of data. Although this is usually not a problem, in some cases it can lead to unexpected results. The main problem that may arise is that different colors can have the same intensity - especially when using the first equation. In edge detection, this can possibly lead to the absence of an edge when in fact there is one. While this can be prevented by using all three values instead of the intensity, it is often not necessary as the cases are rare and the edges themselves not strong. Now that we have gone over how the intenstiy of an image can be calculated and used, next we will talk about how vectors can be calculated from images.
-      </p>
+      </div>
     </div>
     <div class="Paper" id="Vector">
       <a id="vectors"><h2>Images as a Matrix of Vectors</h2></a>
-      <p class="text">
+      <div class="text">
         Images are commonly stored on computers as an array of pixels. Although on software they can be stored as a 1 dimensional array, it would be more accurate to think of these arrays as representing a 2 dimensional image. As a 2-Dimensional image, each pixel would have 8 surrounding neighbor pixels (North, North East, East, South East, South, South West, West, and North West). In each direction we can calculate a scalar quantity from the pixel - either an RGB value or its corresponding intensity. In otherwords, we have both a direction, and magnitude - thus we can calculate vector quantities for every pixel in an image. If we extend that principle to the whole area of pixels, can think of the Image as a 2D vectorspace. Furthermore, we can represent this image as a 2D matrix. Note, however, that this matrix will be very large - images are often a few thousands pixels wide by a few thousand pixels long, resulting in a total number of pixels to the order of millions. Now we can perform operations such as finding the gradient vector at a certain point, or perform convolution between the image matrix and another operator matrix. Let us first consider finding the gradient of a matrix.
-      </p>
+      </div>
     </div>
     <div class="Paper" id="Gradient">
       <a id="gradient"><h2>Gradient Vectors</h2></a>
-      <p class="text">
+      <div class="text">
         The gradient vector is similar to the derivative of a vector. In the case of images we are working with a 2-Dimensional space, so we can think of the gradient vector in terms of x and y. 
         \[ \vec{\nabla}f(x, y) = \langle{\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}}\rangle \]
         This is our first use of differential equations with images, so it is worth our time to delve a bit further. In essence edge detection requires us to find the difference in intensity between a pixel and its surrounding neighbor pixels. The gradient vector allows to do just that on an image, which is why it is of much importance to us. However, the equation introduced above models the gradient vector on a continuouos space - whereas on computers images are stored as a discrete 2-Dimensional collection of pixels. Thus a separate equation must be considered for the discrete case.
         \[ \frac{\partial f}{\partial x} = \frac{I(x + 1, y) - I(x - 1, y)}{2} \]
         \[\frac{\partial f}{\partial y} = \frac{I(x, y + 1) - I(x, y - 1)}{2} \]
-        I represents the 2-D image matrix, and the (x, y) refer to the pixel located at the point (x, y) on the image. Once the gradient vector is determined, some other properties can also be calculated. Specifically, the magnitude and angle of the gradient can be calculated. Because the gradient is essentially a derivative, its magnitude quantifies how quickly the image is changing at that point<sup>[<a href="#seventh">7</a>]</sup>. In other words, the magnitude is a measure of how strong or defined an edge is compared with its neighboring pixels. The angle of the gradient will be normal to the edge, and so it can be used to calculate the direction of the edge.
+        I represents the 2-D image matrix, and the (x, y) refer to the pixel located at the point (x, y) on the image. Once the gradient vector is determined, some other properties can also be calculated. Specifically, the magnitude and angle of the gradient can be calculated. Because the gradient is essentially a derivative, its magnitude quantifies how quickly the image is changing at that point<sup>[<a href="#fifth">7</a>]</sup>. In other words, the magnitude is a measure of how strong or defined an edge is compared with its neighboring pixels. The angle of the gradient will be normal to the edge, and so it can be used to calculate the direction of the edge.
         <br>
-        Magnitude: \[ \| \mathbf{G} \| = \sqrt{{G_x}^2 + {G_y}^2} \]
-        Angle: \[ \theta = \frac{G_y}{G_x} \]
-      </p>
+        <p class="footer">Magnitude</p>
+        \[ \| \mathbf{G} \| = \sqrt{{G_x}^2 + {G_y}^2} \]
+        <p class="footer">Angle</p>
+        \[ \theta = \arctan{\frac{G_y}{G_x}} \]
+      </div>
     </div>
     <div class="Paper" id="Convolution">
       <a id="convolution"><h2>Matrix Convolution</h2></a>
-      <p class="text">
+      <div class="text">
         Matrix convolution involves the multiplication of a matrix against another matrix<sup>[<a href="#second">2</a>]</sup>. In this case we use special operators that can be multiplied across the whole image matrix to calculate the gradient vectors of the image. One of the main problems to consider when conducting convolution with matrices, are the edges. Let's say a 3x3 square matrix serves as an operator for matrix convolution with a larger 100x100 matrix. Along the edges there may not be any values to multiply with. This can be accounted for in a couple of different ways. One method is to pad the edges of the 100x100 matrix with a border of zeroes one pixel deep. This would allow for convolution against the edges of the matrix, while not changing the overall values. Another way to handle this is to not start from the edge. This would result in a smaller size matrix, but the data will be accurate. This project uses the first method, and pads matrices before convolution.
-      </p>
+      </div>
     </div>
     <div class="Paper" id="Edges">
       <a id="edges"><h2>Edge Detection Algorithms</h2></a>
-      <p class="text">
+      <div class="text">
         Now that we got the basics out of the way, we can start discussing how these edge detection algorithms really work. We will start with the basic Prewitt operator, move on the Sobel operator, then the Laplacian operator, before closing with the canny edge detection algorithm.
-      </p>
+      </div>
     </div>
     <div class="Paper" id="Prewitt">
       <a id="prewitt"><h2>Prewitt Edge Detection</h2></a>
-      <p class="text">
-        The Prewitt operator was developed in 1970 by John Prewitt. It is one of the more basic forms of edge detection, and involves the convolution of a pure first derivative operator on an image. There are two operators - one in the x direction and in the y direction. As you can see, when the convolution is executed, pixels in both x and y directions will be subtracted to their respective opposite. This will give you the difference in intensity at each pixel. This is essentially a pure discrete representation of the gradient vector on the image. 
+      <div class="text">
+        The Prewitt operator was developed in 1970 by John Prewitt<sup>[<a href="#sixth">8</a>]</sup>. It is one of the more basic forms of edge detection, and involves the convolution of a pure first derivative operator on an image. There are two operators - one in the x direction and in the y direction. The matrix in the x direction is shown below, the y direction matrix would be the transpose of this one. As you can see, when the convolution is executed, pixels in the x or y directions will be subtracted to their respective opposite. This will give you the difference in intensity at each pixel. This is essentially a pure discrete representation of the gradient vector on the image. 
+        <p class="footer">Prewitt Operator</p>
         <div class="Operator">
           <div>-1</div>
           <div>0</div>
@@ -105,12 +108,13 @@
           <div>0</div>
           <div>1</div>
         </div>
-      </p>
+      </div>
     </div>
     <div class="Paper" id="Sobel">
       <a id="sobel"><h2>Sobel Edge Detection</h2></a>
-      <p class="text">
-        While the Prewitt operator will give you a map of all the differences, it does not handle noise very well. The Prewitt operator is prone to returning false edges resulting in an inaccurate map. To avoid this issue, Sobel developed an upgraded version of the Prewitt operator. Instead of taking the pure derivative of the pixels, Sobel weighted the neighbors to the East and West, and North and South directions by a factor of 2. As a result, the intensities of the pixels along the corners are not as important. Another way of thinking of this is that we are blurring the pixels in the corner while still taking them into account. As a result, noise is reduced and a more accurate edge map can be developed.
+      <div class="text">
+        While the Prewitt operator will give you a map of all the differences, it does not handle noise very well. The Prewitt operator is prone to returning false edges resulting in an inaccurate map. To avoid this issue, the Sobel-Feldman operator is commonly used instead. Researchers Irwin Sobel, and Gary Feldman introduced this operator as part of a talk in a larger convention in 1968<sup>[<a href="#seventh">9</a>]</sup>. Instead of taking the pure derivative of the pixels, Sobel weighted the neighbors to the East and West, and North and South directions by a factor of 2. As a result, the intensities of the pixels along the corners are not as important in the final result. Another way of thinking of this is that we are blurring the pixels in the corner while still taking them into account. As a result, noise is reduced and a more accurate edge map can be developed.
+        <p class="footer">Sobel Operator</p>
         <div class="Operator">
           <div>-1</div>
           <div>0</div>
@@ -122,13 +126,14 @@
           <div>0</div>
           <div>1</div>
         </div>
-      </p>
+      </div>
     </div>
     <div class="Paper" id="Laplacian">
       <a id="laplacian"><h2>Laplacian Edge Detection</h2></a>
-      <p class="text">
+      <div class="text">
       \[ \vec{\nabla}L(x, y) = \frac{\partial^2 L}{\partial x^2} + \frac{\partial^2 L}{\partial y^2} \]
-        The Laplacian operator uses second order derivatives to generate the edge map. This edge detection operator has the downside of being very sensitive to noise. 
+        The Laplacian operator uses second order derivatives to generate the edge map. Based on the original Laplace operator developed by Pierre-Simon de Laplace, the discrete matrix representation can be used to find edges in an image<sup>[<a href="#third">3</a>]</sup>. However, because this operator essentially detects changes in the changes of the image, it has the downside of being very sensitive to noise. To avoid this, the image is commonly blurred before processing to avoid returning unnecessary edges.
+        <p class="footer">Laplacian Operator</p>
         <div class="Operator">
           <div>-1</div>
           <div>-1</div>
@@ -140,43 +145,63 @@
           <div>-1</div>
           <div>-1</div>
         </div>
-      </p>
+      </div>
     </div>
     <div class="Paper" id="Canny">
       <a id="canny"><h2>Canny Edge Detection</h2></a>
-      <p class="text">
-      The Canny Edge Detection algorithm builds on the Sobel operator to produce a better map of edges. Once an initial map of edges using the Sobel operator is formed, the edges are thinned through a non-maximum suppression algorithm. This algorithm only keeps the strongest edge and ignores all other weaker edges. Then through double thresholding, edges that are weaker than the lower threshold are filtered out while edges that are stronger than the higher threshold are highlighted. Finally, the edges that lie between the low and high thresholds are either filtered out or highlighted based on its surrounding pixels through hysteresis thresholding. In short, if a weak edge is connected to a strong edge then it is highlighted, and ignored otherwise.<sup>[<a href="#third">3</a>]</sup> The final result is a clear map of edges.
-      </p>
+      <div class="text">
+      The Canny Edge Detection algorithm builds on the Sobel operator to produce a better map of edges. Once an initial map of edges using the Sobel operator is formed, the edges are thinned through a non-maximum suppression algorithm. This algorithm only keeps the strongest edge and ignores all other weaker edges. Then through double thresholding, edges that are weaker than the lower threshold are filtered out while edges that are stronger than the higher threshold are highlighted. Finally, the edges that lie between the low and high thresholds are either filtered out or highlighted based on its surrounding pixels through hysteresis thresholding. In short, if a weak edge is connected to a strong edge then it is highlighted, and ignored otherwise.<sup>[<a href="#third">3</a>]</sup> The final result is a clear map of edges. Although this method was developed over 30 years age in 1986 by John F. Canny, it is still one of the more commonly used edge detection algorithms today<sup>[<a href="#eighth">10</a>]</sup>.
+      </div>
     </div>
     <div class="Paper" id="Applications">
       <a id="applications"><h2>Applications of Edge Detection</h2></a>
-      <p class="text">
-        Using derivatives to calculate the edges in an image is an important first step to many applications of computer vision. Some common uses can be found in object recognition and detection, character processing.
-      </p>
+      <div class="text">
+        Using derivatives to calculate the edges in an image is an important first step to many applications of computer vision. Some common uses can be found in object recognition and detection.
+      </div>
     </div>
     <div class="Paper" id="Recognition">
       <a id="recognition"><h2>Object Recognition and Detection</h2></a>
-      <p class="text">
-        Object recognition and detection is a popular and growing field of computer vision. Many digital cameras use face detection algorithms to focus on and track faces when taking a picture. Some businesses like Tesla are experimenting on using object detection and recognition to develop self driving cars. Often, the first step in these algorithms are to generate the edges in the image. Then the map of edges are compared across a database of hundreds or sometimes thousands of known edges. Based on how close the edges are to the ones in the database, computers can classify an image as an object within a specific confidence level.
-      </p>
+      <div class="text">
+        Object recognition and detection is a popular and growing field of computer vision. Many digital cameras use face detection algorithms to focus on and track faces when taking a picture. Some businesses like Tesla are experimenting on using object detection and recognition to develop self driving cars. Often, the first step in these algorithms are to generate the edges in the image. Then the map of edges are compared with points across a database of hundreds or sometimes thousands of edges of known images. By comparing data such as the angle and magnitude of the edges with a database, computers can classify an image as an object within a specific confidence level. While using edges will reduce the effects of lighting, or color when detecting objects, it is important to check different transformations and sizes of the objects<sup>[<a href="#ninth">11</a>]</sup>.
+      </div>
     </div>
     <div class="Paper" id="Example">
       <a id="example"><h2>Example implementations of edge detection</h2></a>
-      <p class="text">
+      <div class="text">
         <a href="https://outisnomore.github.io/image-processing">Go here for a sample implementation</a>
-      </p>
+      </div>
     </div>
     <div id="references">
       <a id="reference"><h2>References</h2></a>
-      <ul class="reference_list">
-        <li>1. <a id="first" href="https://homepages.inf.ed.ac.uk/rbf/HIPR2/value.htm">Pixel Values</a></li>
-        <li>2. <a id="second" href="https://cg.ivd.kit.edu/downloads/assignment3_GPUC.pdf">Image Convolution</a></li>
-        <li>3. <a id="third" href="https://cse.usf.edu/~r1k/MachineVisionBook/MachineVision.files/MachineVision_Chapter5.pdf">Edge Detection</a></li>
-        <li>4. <a id="fourth" href="https://homepages.inf.ed.ac.uk/rbf/HIPR2/sobel.htm">Sobel Edge Detector</a></li>
-        <li>5. <a id="fifth" href="https://cse442-17f.github.io/Sobel-Laplacian-and-Canny-Edge-Detection-Algorithms/">Stepping into the Filter</a></li>
-        <li>6. <a id="sixth" href="https://www.w3.org/TR/AERT/#color-contrast">Techniques For Accessibility Evaluation And Repair Tools</a></li>
-        <li>7. <a id="seventh" href="https://www.cs.umd.edu/~djacobs/CMSC426/ImageGradients.pdf">Image Gradients</a></li>
-      </ul>
+      <ol class="reference_list">
+        <li>
+          <p id="first">Fisher, Robert, et al. &quotPixel Values.&quot <cite>HIPR</cite>,homepages.inf.ed.ac.uk/rbf/HIPR2/value.htm. Accessed 10 April 2022.</p>
+        </li>
+        <li>
+          <p id="second">Dachsbacher, Carsten, et al. &quotGPU Computing: Image Convolution.&quot <cite>Karlsruhe Institute of Technology</cite>, cg.ivd.kit.edu/downloads/assignment3_GPUC.pdf. Accessed 8 April 2022.</p>
+        </li>
+        <li>
+          <p id="third">Jain, Ramesh, et al. <cite>Machine Vision.</cite> McGraw-Hill, 1995.</p>
+        </li>
+        <li>
+          <p id="fourth">Chrishold, Wendy, and Ridpath, Chris. %quotTechniques for Accessibility Evaluation and Repair Tools.&quot <cite>W3C</cite> www.w3.org/TR/AERT/#color-contrast. Accessed 10 April 2022.</p>
+        </li>
+        <li>
+          <p id="fifth"> Jacobs, David. &quotImage Gradients.&quot www.cs.umd.edu/~djacobs/CMSC426/ImageGradients.pdf. Accessed 9 April 2022.</p>
+        </li>
+        <li>
+          <p id="sixth">Prewitt, J.M.S. &quotObject enhancement and extraction.&quot <cite>Picture Processing and Psychopictorics</cite>, 1970, pp. 75-149.</p>
+        </li>
+        <li>
+          <p id="seventh">Sobel, Irwin. &quotAn Isotropic 3x3 Image Gradient Operator&quot Presentation at Stanford A.I. Project, 1968.</p>
+        </li>
+        <li>
+          <p id="eighth">Pound, Mike. &quotCanny Edge Detector - Computerphile.&quot<cite>YouTube</cite>, uploaded by Computerphile, 11 November 2015, www.youtube.com/watch?v=sRFM5IEqR2w</p>
+        </li>
+        <li>
+          <p id="ninth">James, Alex P. &quotEdge Detection for Pattern Recognition: A Survey&quot <cite>arXiv,</cite> 2016, arxiv.org/ftp/arxiv/papers/1602/1602.04593.pdf. Accessed 10 April 2022</p>
+        </li>
+      </ol>
     </div>
   </body>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>

@@ -15,7 +15,7 @@ h2{
   padding: 0 30px 20px;
 }
 
-p{
+.text{
   font-size: 16px;
   padding: 0 30px 20px;
   line-height: 2;
@@ -47,9 +47,8 @@ body{
     padding: 0px 10px 5px 10px !important;
 }
 
-#references li, #references ul, #references ul li{
-  font-size: 20px;
-  list-style: outside none none !important;
+#references li, #references ol, #references ol li{
+  font-size: 16px;
 }
 
 .Operator{
@@ -64,4 +63,9 @@ body{
   aspect-ratio: 1;
   border: 1px solid black;
   text-align: center;
+}
+
+.footer{
+  text-align: center;
+  font-size: 16px;
 }
