@@ -73,6 +73,7 @@
         \[ \frac{\partial f}{\partial x} = \frac{I(x + 1, y) - I(x - 1, y)}{2} \]
         \[\frac{\partial f}{\partial y} = \frac{I(x, y + 1) - I(x, y - 1)}{2} \]
         I represents the 2-D image matrix, and the (x, y) refer to the pixel located at the point (x, y) on the image. Once the gradient vector is determined, some other properties can also be calculated. Specifically, the magnitude and angle of the gradient can be calculated. Because the gradient is essentially a derivative, its magnitude quantifies how quickly the image is changing at that point<sup>[<a href="#seventh">7</a>]</sup>. In other words, the magnitude is a measure of how strong or defined an edge is compared with its neighboring pixels. The angle of the gradient will be normal to the edge, and so it can be used to calculate the direction of the edge.
+        <br>
         Magnitude: \[ \| \mathbf{G} \| = \sqrt{{G_x}^2 + {G_y}^2} \]
         Angle: \[ \theta = \frac{G_y}{G_x} \]
       </p>
@@ -93,12 +94,34 @@
       <a id="prewitt"><h2>Prewitt Edge Detection</h2></a>
       <p class="text">
         The Prewitt operator was developed in 1970 by John Prewitt. It is one of the more basic forms of edge detection, and involves the convolution of a pure first derivative operator on an image. There are two operators - one in the x direction and in the y direction. As you can see, when the convolution is executed, pixels in both x and y directions will be subtracted to their respective opposite. This will give you the difference in intensity at each pixel. This is essentially a pure discrete representation of the gradient vector on the image. 
+        <div class="Operator">
+          <div>-1</div>
+          <div>0</div>
+          <div>1</div>
+          <div>-1</div>
+          <div>0</div>
+          <div>1</div>
+          <div>-1</div>
+          <div>0</div>
+          <div>1</div>
+        </div>
       </p>
     </div>
     <div class="Paper" id="Sobel">
       <a id="sobel"><h2>Sobel Edge Detection</h2></a>
       <p class="text">
         While the Prewitt operator will give you a map of all the differences, it does not handle noise very well. The Prewitt operator is prone to returning false edges resulting in an inaccurate map. To avoid this issue, Sobel developed an upgraded version of the Prewitt operator. Instead of taking the pure derivative of the pixels, Sobel weighted the neighbors to the East and West, and North and South directions by a factor of 2. As a result, the intensities of the pixels along the corners are not as important. Another way of thinking of this is that we are blurring the pixels in the corner while still taking them into account. As a result, noise is reduced and a more accurate edge map can be developed.
+        <div class="Operator">
+          <div>-1</div>
+          <div>0</div>
+          <div>1</div>
+          <div>-2</div>
+          <div>0</div>
+          <div>2</div>
+          <div>-1</div>
+          <div>0</div>
+          <div>1</div>
+        </div>
       </p>
     </div>
     <div class="Paper" id="Laplacian">
@@ -106,6 +129,17 @@
       <p class="text">
       \[ \vec{\nabla}L(x, y) = \frac{\partial^2 L}{\partial x^2} + \frac{\partial^2 L}{\partial y^2} \]
         The Laplacian operator uses second order derivatives to generate the edge map. This edge detection operator has the downside of being very sensitive to noise. 
+        <div class="Operator">
+          <div>-1</div>
+          <div>-1</div>
+          <div>-1</div>
+          <div>-1</div>
+          <div>8</div>
+          <div>-1</div>
+          <div>-1</div>
+          <div>-1</div>
+          <div>-1</div>
+        </div>
       </p>
     </div>
     <div class="Paper" id="Canny">
