@@ -113,7 +113,7 @@
     <div class="Paper" id="Sobel">
       <a id="sobel"><h2>Sobel Edge Detection</h2></a>
       <div class="text">
-        While the Prewitt operator will give you a map of all the differences, it does not handle noise very well. The Prewitt operator is prone to returning false edges resulting in an inaccurate map. To avoid this issue, the Sobel-Feldman operator is commonly used instead. Researchers Irwin Sobel, and Gary Feldman introduced this operator as part of a talk in a larger convention in 1968<sup>[<a href="#seventh">7</a>]</sup>. Instead of taking the pure derivative of the pixels, Sobel weighted the neighbors to the East and West, and North and South directions by a factor of 2. As a result, the intensities of the pixels along the corners are not as important in the final result. Another way of thinking of this is that we are blurring the pixels in the corner while still taking them into account. As a result, noise is reduced and a more accurate edge map can be developed.
+        While the Prewitt operator will give you a map of all the differences, it does not handle noise very well. What this means is that the Prewitt operator is prone to returning false edges resulting in an inaccurate map. To avoid this issue, the Sobel-Feldman operator is commonly used instead. Researchers Irwin Sobel, and Gary Feldman introduced this operator as part of a talk in a larger convention in 1968<sup>[<a href="#seventh">7</a>]</sup>. Instead of taking the pure derivative of the pixels, Sobel weighted the neighbors to the East and West, and North and South directions by a factor of 2. As a result, the intensities of the pixels along the corners are not as important in the final result. Another way of thinking of this is that we are blurring the pixels in the corner while still taking them into account. As a result, noise is reduced and a more accurate edge map can be developed.
         <p class="footer">Sobel Operator in the X direction</p>
         <div class="Operator">
           <div>-1</div>
@@ -132,7 +132,7 @@
       <a id="laplacian"><h2>Laplacian Edge Detection</h2></a>
       <div class="text">
       \[ \vec{\nabla}L(x, y) = \frac{\partial^2 L}{\partial x^2} + \frac{\partial^2 L}{\partial y^2} \]
-        The Laplacian operator uses second order derivatives to generate the edge map. Based on the original Laplace operator developed by Pierre-Simon de Laplace, the discrete matrix representation can be used to find edges in an image<sup>[<a href="#third">3</a>]</sup>. However, because this operator essentially detects changes in the changes of the image, it has the downside of being very sensitive to noise. To avoid this, the image is commonly blurred before processing to avoid returning unnecessary edges.
+        Shown above is the equation that represents the continuous second order derivative used as the basis for the Laplacian operator. The Laplacian operator uses second order derivatives to generate the edge map. Based on the original Laplace operator developed by Pierre-Simon de Laplace, the discrete matrix representation can be used to find edges in an image<sup>[<a href="#third">3</a>]</sup>. However, because this operator essentially detects changes in the changes of the image, it has the downside of being very sensitive to noise. To avoid this, the image is commonly blurred before processing to avoid returning unnecessary edges.
         <p class="footer">Laplacian Operator</p>
         <div class="Operator">
           <div>-1</div>
@@ -175,7 +175,7 @@
       <a id="reference"><h2>References</h2></a>
       <ol class="reference_list">
         <li>
-          <p id="first">Fisher, Robert, et al. &quotPixel Values.&quot <cite>HIPR</cite>,homepages.inf.ed.ac.uk/rbf/HIPR2/value.htm. Accessed 10 April 2022.</p>
+          <p id="first">Fisher, Robert, et al. &quotPixel Values.&quot <cite>HIPR</cite>, homepages.inf.ed.ac.uk/rbf/HIPR2/value.htm. Accessed 10 April 2022.</p>
         </li>
         <li>
           <p id="second">Dachsbacher, Carsten, et al. &quotGPU Computing: Image Convolution.&quot <cite>Karlsruhe Institute of Technology</cite>, cg.ivd.kit.edu/downloads/assignment3_GPUC.pdf. Accessed 8 April 2022.</p>
