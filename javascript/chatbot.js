@@ -79,16 +79,16 @@ const context = new (window.AudioContext || window.webkitAudioContext)(); // sou
 async function makeSound(sequence){
   const [dot, dash] = await fetchBuffer();
   let time = 0;
-  sequence.split('').forEach(type => {
-    if(type === ' '){
-      time += 0.3;// wait 300 milliseconds after every letter - change for faster or slower
+  sequence.split('').forEach(character => {
+    if(character === ' '){
+      time += 0.3; // wait 300 milliseconds after every word - change for faster or slower
       return;
     }
-    let test = context.createBufferSource();
-    test.buffer = type === '-' ? dash : dot;
-    test.connect(context.destination);
-    test.start(context.currentTime + time);
-    time += test.buffer.duration + 0.03;// makes sure order is synchronous with 30 millisecond gap between letters
+    let test = context.createBufferSource(); // Create an audio/sound buffer
+    test.buffer = character === '-' ? dash : dot; // set the sound buffer to a dot or a dash
+    test.connect(context.destination); // set output destination to the sound card
+    test.start(context.currentTime + time); // start playing after waiting for the given time
+    time += test.buffer.duration + 0.03; // makes sure order is synchronous with 30 millisecond gap between letters
   });
   setTimeout(function(){
     talking = false;
