@@ -1,0 +1,31 @@
+.header{
+  display: flex;
+}
+
+#home{
+  justify-content: left;
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+#title{
+  justify-content: center;
+  text-align: center;
+  font-size: 40px;
+  margin: auto;
+  width: 60%;
+}
+
+#links{
+  justify-content: right;
+  text-align: right;
+  margin-right: 0;
+  padding: 5px;
+}
+
+.body{
+  justify-content: center;
+  text-align: center;
+  padding: 50px 80px 50px;
+}
