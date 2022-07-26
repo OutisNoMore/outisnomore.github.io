@@ -68,6 +68,7 @@ body{
   aspect-ratio: 1;
   border: 1px solid black;
   text-align: center;
+  padding: 6px;
 }
 
 .footer{
