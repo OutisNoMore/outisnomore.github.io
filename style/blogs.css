@@ -25,22 +25,16 @@
 }
 
 div.body{
+  padding: 50px 80px 50px;
+}
+
+div.body h1{
+  font-size: 30px;
+}
+
+div.body #text{
   font-size: 20px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
-table.blogs{
-  margin-left: auto;
-  margin-right: auto;
-}
-
-td.date{
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-td.description{
-  padding-left: 10px;
-  padding-right: 10px;
+  line-height: 2;
+  letter-spacing: 1px;
+  text-indent: 5%;
 }
