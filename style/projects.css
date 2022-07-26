@@ -38,12 +38,25 @@ li{
   letter-spacing: 1px;
 }
 
+table.project{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td.icon{
+  text-align: center;
+  padding: 10px;
+}
+
+td.text{
+  padding: 10px;
+}
+
 table, th, td{
   border: 1px solid black;
 }
 
 div.body img{
-  margin: auto;
   width: 60px;
   height: 60px;
 }
