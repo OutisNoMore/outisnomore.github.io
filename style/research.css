@@ -20,6 +20,13 @@ h3{
   padding: 0 30px 20px;
 }
 
+div.author{
+  font-style: italic;
+  font-size: 16px;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
 .text{
   font-size: 16px;
   padding: 0 30px 20px;
