@@ -6,7 +6,7 @@ div.body h1{
   font-size: 25px;
 }
 
-div.body #text{
+.text{
   font-size: 16px;
   line-height: 2;
   letter-spacing: 1px;
