@@ -1,5 +1,20 @@
+h1{
+  color: black;
+  font-size: 2em;
+  border-bottom: 1px solid #375e97;
+}
+
+.subject{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #999999;
+}
+
 .body{
-  justify-content: center;
-  text-align: center;
+  text-align: left;
+  padding: 50px 80px 50px;
+}
+
+.details{
   padding: 50px 80px 50px;
 }
