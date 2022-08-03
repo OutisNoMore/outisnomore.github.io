@@ -9,12 +9,8 @@ table.blogs{
   margin-right: auto;
 }
 
-td.date{
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-td.description{
-  padding-left: 10px;
-  padding-right: 10px;
+td{
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 20px;
 }
