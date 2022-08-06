@@ -1,3 +1,4 @@
+let squareRotation = 0;
 /*
  * loadShader
  *   Compiles a shader with given type
@@ -123,7 +124,7 @@ function initBuffers(gl){
  * RETURN:
  *   none
  */
-function drawScene(gl, programInfo, buffers){
+function drawScene(gl, programInfo, buffers, deltaTime){
   gl.clearColor(0.0, 0.0, 0.0, 1.0); // clear canvas to black
   gl.clearDepth(1.0);                // clear perspectives
   gl.enable(gl.DEPTH_TEST);          // enable depth testing
@@ -134,7 +135,7 @@ function drawScene(gl, programInfo, buffers){
 
   // Create perspective matrix
   // Used to simulate camera distortion
-  const fieldOfView = Math.PI / 4; // Field of view of 45 degrees
+  const fieldOfView = Math.PI/4; // Field of view of 45 degrees
   const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight; // set w/h ratio to that of canvas
   const zNear = 0.1;  // from 0.1 units
   const zFar = 100.0; // to 100 units away from camera
@@ -149,6 +150,11 @@ function drawScene(gl, programInfo, buffers){
   mat4.translate(modelViewMatrix,    // destination matrix
                  modelViewMatrix,    // matrix to translate
                  [-0.0, 0.0, -6.0]); // amount to translate
+  mat4.rotate(modelViewMatrix, // destination matrix
+              modelViewMatrix, // matrix to rotate
+              squareRotation,  // amount to rotate in radians
+              [1, 1, 0]);      // axis of rotation
+  squareRotation += deltaTime;
 
   // Specify how to pull positions from position buffer into vertexPosition
   {
@@ -277,8 +283,16 @@ function initCanvas(){
 
   // buffer of positions
   const buffers = initBuffers(glContext);
-  // draw 2d shape
-  drawScene(glContext, programInfo, buffers);
+  // Re-draw 2d scene every frame
+  let then = 0;
+  function render(now){
+    now *= 0.001; // convert to seconds
+    const deltaTime = now - then; // calculate change in time between frame
+    then = now // update time
+    drawScene(glContext, programInfo, buffers, deltaTime); // redraw scene
+    requestAnimationFrame(render); // callback render function every frame
+  }
+  requestAnimationFrame(render); // call render function every frame
 }
 
 // Run main function on load
