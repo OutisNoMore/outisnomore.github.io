@@ -75,7 +75,7 @@ function initShaderProgram(gl, vsSource, fsSource){
  * RETURN
  *   buffer with positions
  */
-function initBuffers(gl){
+function initBuffers(gl, positions){
   // Colors
   const colors = [
     1.0, 1.0, 1.0, 1.0, // white
@@ -88,13 +88,6 @@ function initBuffers(gl){
   gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
 
-  // Create position array
-  const positions = [
-    1.0, 1.0,
-   -1.0, 1.0,
-    1.0,-1.0,
-   -1.0,-1.0,
-  ];
   // Create buffer with position of square
   const positionBuffer = gl.createBuffer();
   // Use position buffer for gl rendering
@@ -124,7 +117,7 @@ function initBuffers(gl){
  * RETURN:
  *   none
  */
-function drawScene(gl, programInfo, buffers, deltaTime){
+function drawScene(gl, programInfo, buffers, deltaTime, translate, rotate){
   gl.clearColor(0.0, 0.0, 0.0, 1.0); // clear canvas to black
   gl.clearDepth(1.0);                // clear perspectives
   gl.enable(gl.DEPTH_TEST);          // enable depth testing
@@ -149,11 +142,11 @@ function drawScene(gl, programInfo, buffers, deltaTime){
   const modelViewMatrix = mat4.create();
   mat4.translate(modelViewMatrix,    // destination matrix
                  modelViewMatrix,    // matrix to translate
-                 [-0.0, 0.0, -6.0]); // amount to translate
+                 translate); // amount to translate
   mat4.rotate(modelViewMatrix, // destination matrix
               modelViewMatrix, // matrix to rotate
               squareRotation,  // amount to rotate in radians
-              [1, 1, 0]);      // axis of rotation
+              rotate);      // axis of rotation
   squareRotation += deltaTime;
 
   // Specify how to pull positions from position buffer into vertexPosition
@@ -281,19 +274,29 @@ function initCanvas(){
     },
   };
 
-  // buffer of positions
-  const buffers = initBuffers(glContext);
+  // Create position array
+  const positions = [
+    1.0, 1.0,
+   -1.0, 1.0,
+    1.0,-1.0,
+   -1.0,-1.0,
+  ];
+ // buffer of positions
+  const buffers = initBuffers(glContext, positions);
+  let translate = [-0.0, 0.0, -6.0];
+  let rotate = [1, 1, 0]
   // Re-draw 2d scene every frame
   let then = 0;
   function render(now){
     now *= 0.001; // convert to seconds
     const deltaTime = now - then; // calculate change in time between frame
     then = now // update time
-    drawScene(glContext, programInfo, buffers, deltaTime); // redraw scene
+    drawScene(glContext, programInfo, buffers, deltaTime, translate, rotate); // redraw scene
     requestAnimationFrame(render); // callback render function every frame
   }
   requestAnimationFrame(render); // call render function every frame
 }
 
 // Run main function on load
-window.onload = initCanvas;
+//window.onload = initCanvas;
+window.addEventListener("load", initCanvas);
