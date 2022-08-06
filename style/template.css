@@ -24,3 +24,14 @@
   margin-right: 0;
   padding: 5px;
 }
+
+div.body{
+  font-family: "Times New Roman", Times, serif;
+  padding: 50px 80px 50px;
+}
+
+.text{
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 1px;
+}

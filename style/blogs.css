@@ -1,12 +1,4 @@
-div.body{
-  padding: 50px 80px 50px;
-}
-
-div.body h1{
-  font-size: 30px;
-}
-
-div.body #text{
+.text{
   font-size: 20px;
   line-height: 2;
   letter-spacing: 1px;

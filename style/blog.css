@@ -1,12 +1,11 @@
-div.body{
-  font-size: 20px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
 table.blogs{
   margin-left: auto;
   margin-right: auto;
+  font-size: 20px;
+}
+
+th{
+  font-size: 25px;
 }
 
 td{
