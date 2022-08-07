@@ -284,7 +284,7 @@ function initCanvas(){
  // buffer of positions
   const buffers = initBuffers(glContext, positions);
   let translate = [-0.0, 0.0, -6.0];
-  let rotate = [1, 1, 0]
+  let rotate = [1, 1, 1];
   // Re-draw 2d scene every frame
   let then = 0;
   function render(now){

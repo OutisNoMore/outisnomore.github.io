@@ -68,7 +68,7 @@ function main(){
   const buffers = initBuffers(glContext3D, positions);
   // Re-draw 2d scene every frame
   let translate = [-0.0, 0.0, -6.0];
-  let rotate = [-1, 1, 0];
+  let rotate = [1,-1,-1];
   let then = 0;
   function render(now){
     now *= 0.001; // convert to seconds
