@@ -1,4 +1,4 @@
-let squareRotation = 0;
+let rotations = 0;
 /*
  * loadShader
  *   Compiles a shader with given type
@@ -71,18 +71,15 @@ function initShaderProgram(gl, vsSource, fsSource){
  * ----------------------------------------
  * PARAMETERS:
  *   gl - webGL canvas context
+ *   positions - array with vertices of 
+ *               object
+ *   colors - color for surface of object
  * ----------------------------------------
  * RETURN
  *   buffer with positions
  */
-function initBuffers(gl, positions){
-  // Colors
-  const colors = [
-    1.0, 1.0, 1.0, 1.0, // white
-    1.0, 0.0, 0.0, 1.0, // red
-    0.0, 1.0, 0.0, 1.0, // green
-    0.0, 0.0, 1.0, 1.0, // blue
-  ];
+function initBuffers(gl, positions, colors, dimension){
+  console.log(colors);
   // Create buffer for colors
   const colorBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
@@ -98,11 +95,31 @@ function initBuffers(gl, positions){
   gl.bufferData(gl.ARRAY_BUFFER,
                 new Float32Array(positions),
                 gl.STATIC_DRAW);
-
-  return {
-    position: positionBuffer,
-    color: colorBuffer,
-  };
+  // Buffer of triangle to draw shape
+  if(dimension == 3){
+    const indexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+    const indices = [
+      0,  1,  2,      0,  2,  3,    // front
+      4,  5,  6,      4,  6,  7,    // back
+      8,  9,  10,     8,  10, 11,   // top
+      12, 13, 14,     12, 14, 15,   // bottom
+      16, 17, 18,     16, 18, 19,   // right
+      20, 21, 22,     20, 22, 23,   // left
+    ];
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+    return {
+      position: positionBuffer,
+      color: colorBuffer,
+      indices: indexBuffer,
+    };
+  }
+  else{
+    return {
+      position: positionBuffer,
+      color: colorBuffer,
+    };
+  }
 }
 
 /*
@@ -117,7 +134,7 @@ function initBuffers(gl, positions){
  * RETURN:
  *   none
  */
-function drawScene(gl, programInfo, buffers, deltaTime, translate, rotate){
+function drawScene(gl, programInfo, buffers, deltaTime, translate, rotate, dimension){
   gl.clearColor(0.0, 0.0, 0.0, 1.0); // clear canvas to black
   gl.clearDepth(1.0);                // clear perspectives
   gl.enable(gl.DEPTH_TEST);          // enable depth testing
@@ -143,15 +160,31 @@ function drawScene(gl, programInfo, buffers, deltaTime, translate, rotate){
   mat4.translate(modelViewMatrix,    // destination matrix
                  modelViewMatrix,    // matrix to translate
                  translate); // amount to translate
-  mat4.rotate(modelViewMatrix, // destination matrix
-              modelViewMatrix, // matrix to rotate
-              squareRotation,  // amount to rotate in radians
-              rotate);      // axis of rotation
-  squareRotation += deltaTime;
+  if(dimension === 2){
+    mat4.rotate(modelViewMatrix, // destination matrix
+                modelViewMatrix, // matrix to rotate
+                rotations,  // amount to rotate in radians
+                rotate);      // axis of rotation
+  }
+  else if(dimension === 3){
+    mat4.rotate(modelViewMatrix,
+                modelViewMatrix,
+                rotations,
+                rotate[0])
+    mat4.rotate(modelViewMatrix,
+                modelViewMatrix,
+                rotations * 0.3,
+                rotate[1]);
+    mat4.rotate(modelViewMatrix,
+                modelViewMatrix,
+                rotations * 0.7,
+                rotate[2]);
+  }
+    rotations += deltaTime;
 
   // Specify how to pull positions from position buffer into vertexPosition
   {
-    const numComponents = 2; // pull 2 values per iteration
+    const numComponents = dimension; // pull d values per iteration, for d dimensional object
     const type = gl.FLOAT;   // data type is 32 bit float
     const normalize = false; // don't normalize
     const stride = 0;        // number of bytes to get from one set to next
@@ -186,6 +219,7 @@ function drawScene(gl, programInfo, buffers, deltaTime, translate, rotate){
     gl.enableVertexAttribArray(
       programInfo.attribLocations.vertexColor);
   }
+
   // set this program to webgl
   gl.useProgram(programInfo.program);
   // set shader uniforms
@@ -197,10 +231,21 @@ function drawScene(gl, programInfo, buffers, deltaTime, translate, rotate){
     programInfo.uniformLocation.modelViewMatrix,
     false,
     modelViewMatrix);
-  {
-    const offset = 0;
-    const vertexCount = 4;
-    gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
+  if(dimension === 3){
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.indices);
+    {
+      const vertexCount = 36;
+      const type = gl.UNSIGNED_SHORT;
+      const offset = 0;
+      gl.drawElements(gl.TRIANGLES, vertexCount, type, offset);
+    }
+  }
+  else if(dimension === 2){
+    {
+      const offset = 0;
+      const vertexCount = 4;
+      gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
+    }
   }
 }
 
@@ -281,8 +326,16 @@ function initCanvas(){
     1.0,-1.0,
    -1.0,-1.0,
   ];
+  // Colors - use rgba values
+  const color = [
+    1.0, 1.0, 1.0, 1.0, // white
+    1.0, 0.0, 0.0, 1.0, // red
+    0.0, 1.0, 0.0, 1.0, // green
+    0.0, 0.0, 1.0, 1.0, // blue
+  ];
+
  // buffer of positions
-  const buffers = initBuffers(glContext, positions);
+  const buffers = initBuffers(glContext, positions, color, 2);
   let translate = [-0.0, 0.0, -6.0];
   let rotate = [1, 1, 1];
   // Re-draw 2d scene every frame
@@ -291,7 +344,7 @@ function initCanvas(){
     now *= 0.001; // convert to seconds
     const deltaTime = now - then; // calculate change in time between frame
     then = now // update time
-    drawScene(glContext, programInfo, buffers, deltaTime, translate, rotate); // redraw scene
+    drawScene(glContext, programInfo, buffers, deltaTime, translate, rotate, 2); // redraw scene
     requestAnimationFrame(render); // callback render function every frame
   }
   requestAnimationFrame(render); // call render function every frame

@@ -57,24 +57,88 @@ function main(){
     },
   };
 
-  // Create position array
+  // Create position array for 3d cube
   const positions = [
-    1.0, 1.0,
-   -1.0, 1.0,
-    1.0,-1.0,
-   -1.0,-1.0,
+    // Front face
+    -1.0, -1.0, 1.0,
+     1.0, -1.0, 1.0,
+     1.0,  1.0, 1.0,
+    -1.0,  1.0, 1.0,
+
+    // Back face
+    -1.0, -1.0, -1.0,
+    -1.0,  1.0, -1.0,
+     1.0,  1.0, -1.0,
+     1.0, -1.0, -1.0,
+
+    // Top face
+    -1.0, 1.0, -1.0,
+    -1.0, 1.0,  1.0,
+     1.0, 1.0,  1.0,
+     1.0, 1.0, -1.0,
+
+    // Bottom Face
+    -1.0, -1.0, -1.0,
+     1.0, -1.0, -1.0,
+     1.0, -1.0,  1.0,
+    -1.0, -1.0,  1.0,
+
+    // Right Face
+    1.0, -1.0, -1.0,
+    1.0,  1.0, -1.0,
+    1.0,  1.0,  1.0,
+    1.0, -1.0,  1.0,
+
+    // Left Face
+    -1.0, -1.0, -1.0,
+    -1.0, -1.0,  1.0,
+    -1.0,  1.0,  1.0,
+    -1.0,  1.0, -1.0,
   ];
+  const faceColors = [
+    [1.0,  1.0,  1.0,  1.0],    // Front face: white
+    [1.0,  0.0,  0.0,  1.0],    // Back face: red
+    [0.0,  1.0,  0.0,  1.0],    // Top face: green
+    [0.0,  0.0,  1.0,  1.0],    // Bottom face: blue
+    [1.0,  1.0,  0.0,  1.0],    // Right face: yellow
+    [1.0,  0.0,  1.0,  1.0],    // Left face: purple
+  ];
+
+  // Convert the array of colors into a table for all the vertices.
+  let colors = [];
+  /*
+  colors.push(faceColors[0], faceColors[1], faceColors[2], faceColors[3]);
+  colors.push(faceColors[0], faceColors[1], faceColors[2], faceColors[3]);
+  colors.push(faceColors[0], faceColors[1], faceColors[2], faceColors[3]);
+  colors.push(faceColors[0], faceColors[1], faceColors[2], faceColors[3]);
+  colors.push(faceColors[0], faceColors[1], faceColors[2], faceColors[3]);
+  colors.push(faceColors[0], faceColors[1], faceColors[2], faceColors[3]);
+*/
+  for (var j = 0; j < faceColors.length; ++j) {
+    const c = faceColors[j];
+
+    // Repeat each color four times for the four vertices of the face
+    colors = colors.concat(c, c, c, c);
+  }
+  /*
+  for (const c of faceColors) {
+    // Repeat each color four times for the four vertices of the face
+    colors.push(c, c, c, c);
+  }
+  */
   // buffer of positions
-  const buffers = initBuffers(glContext3D, positions);
+  const buffers = initBuffers(glContext3D, positions, colors, 3);
   // Re-draw 2d scene every frame
   let translate = [-0.0, 0.0, -6.0];
-  let rotate = [1,-1,-1];
+  let rotate = [[0, 0, 1],
+                [0, 1, 0],
+                [1, 0, 0],];
   let then = 0;
   function render(now){
     now *= 0.001; // convert to seconds
     const deltaTime = now - then; // calculate change in time between frame
     then = now // update time
-    drawScene(glContext3D, programInfo, buffers, deltaTime, translate, rotate); // redraw scene
+    drawScene(glContext3D, programInfo, buffers, deltaTime, translate, rotate, 3); // redraw scene
     requestAnimationFrame(render); // callback render function every frame
   }
   requestAnimationFrame(render); // call render function every frame
