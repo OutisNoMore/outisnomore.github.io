@@ -79,7 +79,6 @@ function initShaderProgram(gl, vsSource, fsSource){
  *   buffer with positions
  */
 function initBuffers(gl, positions, colors, dimension){
-  console.log(colors);
   // Create buffer for colors
   const colorBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
