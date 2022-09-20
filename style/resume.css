@@ -17,3 +17,20 @@ h1{
 .details{
   padding: 50px 80px 50px;
 }
+
+li{
+  list-style-type: none;
+  margin: 10px 0px;
+}
+
+.detail{
+  display: flex;
+}
+
+#right{
+  margin-left: auto;
+}
+
+#left{
+  margin-right: auto;
+}
