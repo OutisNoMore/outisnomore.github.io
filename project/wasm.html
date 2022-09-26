@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <link href="../style/template.css" rel="stylesheet">
+    <link rel="icon" href="data:;base64,=">
+    <title>Projects</title>
+  </head>
+  <div class="header">
+    <div id="home"><a href="../index.html"><img src="../util/home.jpg"></a></div>
+    <div id="title">WASM!</div>
+    <div id="links"><a href="../blog/blog.html">blog</a></div>
+    <div id="links"><a href="projects.html">projects</a></div>
+    <div id="links"><a href="../about.html">about me</a></div>
+    <div id="links"><a href="../resume.html">resume</a></div>
+    <div id="links"><a href="../index.html">home</a></div>
+  </div>
+  <body>
+    <div class="body">
+      This is a test project that uses web assembly to calculate the number at the given index in the fibonacci sequence. The original file is written in c.
+      <div id="inputs">
+        <label for="index">Enter an index between 0 and 40:</label>
+        <input type="number" id="index" name="index" min="0" max="40">
+        <button id="fibo">Get Number!</button>
+      </div>
+      Fibonacci Sequence: <p id="output"></p>
+    </div>
+  </body>
+    <script src="./WASM/hello.js"></script>
+    <script src="../javascript/wasm.js"></script>
+</html>
