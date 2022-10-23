@@ -17,4 +17,3 @@ fi
 
 # Compile WASM
 emcc -o $TARGET.html $TARGET.c -O3 -s NO_EXIT_RUNTIME=1 -s "EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']"
-#emcc $TARGET.c -o $TARGET.js -s "EXPORTED_RUNTIME_METHODS=['ccall', 'cwrap']"
