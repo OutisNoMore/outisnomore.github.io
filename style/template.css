@@ -1,6 +1,6 @@
 .header{
   display: flex;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #aaaaaa;
 }
 
 #home{
@@ -27,11 +27,26 @@
 
 div.body{
   font-family: "Times New Roman", Times, serif;
-  padding: 50px 80px 50px;
+  padding: 50px 300px 50px;
 }
 
 .text{
   font-size: 16px;
   line-height: 2;
   letter-spacing: 1px;
+}
+
+footer{
+  display: flex;
+  border-top: 1px solid #aaaaaa;
+  flex-direction: row;
+  justify-content: center;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 40px;
+}
+
+#contact{
+    padding: 10px;
 }
