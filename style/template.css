@@ -1,11 +1,44 @@
 .header{
   display: flex;
   border-bottom: 1px solid #aaaaaa;
+  font-family: Helvetica;
+  justify-content: center;
+}
+
+#dropMenu{
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  min-width: 100px;
+}
+
+.menu{
+  display: inline-block;
+  position: relative;
+  margin-right: 280px;
+}
+
+.links{
+  display: none;
+  position: absolute;
+  min-width: 100px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.item{
+  color: black;
+  background-color: #d0d0d7;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 #home{
   text-align: left;
-  margin-left: 0;
+  margin-left: 300px;
   margin-right: auto;
   margin-bottom: 5px;
 }
