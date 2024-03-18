@@ -38,15 +38,21 @@ send.addEventListener("click", function(){
     .then(response => response.json())
     .then(function(object){
       clearInterval(wait);
-      let text = object.messages[0].message
+      let text = object.messages[0].message;
       typeEffect(text);
       toMorse(text);
     })
     .catch(function(error){
       console.log('Error:', error);
+      clearInterval(wait);
+      let text = "what hath God wrought?"
+      typeEffect(text);
+      toMorse(text);
+/*
       talking = false;
       res.innerHTML = "";
       clearInterval(wait);
+      */
     });
 });
 
