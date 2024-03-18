@@ -1,10 +1,13 @@
 let send    = document.getElementById("send");                  // button to send to api
 let res     = document.getElementById("response");              // display output of chatbot
+let pause   = document.getElementById("pauseBot");              // pause chatbot if talking
+let start   = document.getElementById("startBot");              // start chatbot if silent
 let api     = 'https://account.snatchbot.me/channels/api/api/'; // api for chatbot
 let id      = 'id222870';                                       // api id
 let key     = 'appapp1234';                                     // api key
 let passwd  = 'apspasswd';                                      // api password
 let talking = false;                                            // status of chatbot
+let beeper    = null;                                           // sound of chatbot
 
 let wait; // wait while sending data
 
@@ -56,6 +59,25 @@ send.addEventListener("click", function(){
     });
 });
 
+// TODO: implement pause and start
+// Does not work because sound stuff
+// always adds new sound to play
+
+// pause chatbot morse code if playing
+pause.addEventListener("click", function(){ 
+  if (talking) {
+    beeper.stop();
+  }
+});
+
+// start chatbot morse code if stopped
+start.addEventListener("click", function(){ 
+  if (!talking) {
+    beeper.start();
+  }
+});
+
+
 // translate api response to morse code
 function toMorse(sequence){
   let morse = "";
@@ -90,11 +112,11 @@ async function makeSound(sequence){
       time += 0.3; // wait 300 milliseconds after every word - change for faster or slower
       return;
     }
-    let test = context.createBufferSource(); // Create an audio/sound buffer
-    test.buffer = character === '-' ? dash : dot; // set the sound buffer to a dot or a dash
-    test.connect(context.destination); // set output destination to the sound card
-    test.start(context.currentTime + time); // start playing after waiting for the given time
-    time += test.buffer.duration + 0.03; // makes sure order is synchronous with 30 millisecond gap between letters
+    beeper = context.createBufferSource(); // Create an audio/sound buffer
+    beeper.buffer = character === '-' ? dash : dot; // set the sound buffer to a dot or a dash
+    beeper.connect(context.destination); // set output destination to the sound card
+    beeper.start(context.currentTime + time); // start playing after waiting for the given time
+    time += beeper.buffer.duration + 0.03; // makes sure order is synchronous with 30 millisecond gap between letters
   });
   setTimeout(function(){
     talking = false;
