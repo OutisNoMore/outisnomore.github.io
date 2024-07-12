@@ -1,13 +1,13 @@
-let send    = document.getElementById("send");                  // button to send to api
-let res     = document.getElementById("response");              // display output of chatbot
-let pause   = document.getElementById("pauseBot");              // pause chatbot if talking
-let start   = document.getElementById("startBot");              // start chatbot if silent
-let api     = 'https://account.snatchbot.me/channels/api/api/'; // api for chatbot
-let id      = 'id222870';                                       // api id
-let key     = 'appapp1234';                                     // api key
-let passwd  = 'apspasswd';                                      // api password
-let talking = false;                                            // status of chatbot
-let beeper    = null;                                           // sound of chatbot
+let send     = document.getElementById("send");                  // button to send to api
+let res      = document.getElementById("response");              // display output of chatbot
+let pause    = document.getElementById("pauseBot");              // pause chatbot if talking
+let startBot = document.getElementById("startBot");              // start chatbot if silent
+let api      = 'https://account.snatchbot.me/channels/api/api/'; // api for chatbot
+let id       = 'id222870';                                       // api id
+let key      = 'appapp1234';                                     // api key
+let passwd   = 'apspasswd';                                      // api password
+let talking  = false;                                            // status of chatbot
+let beeper   = null;                                           // sound of chatbot
 
 let wait; // wait while sending data
 
@@ -65,14 +65,14 @@ send.addEventListener("click", function(){
 
 // pause chatbot morse code if playing
 pause.addEventListener("click", function(){ 
-  if (talking) {
+  if (beeper != null && talking) {
     beeper.stop();
   }
 });
 
 // start chatbot morse code if stopped
-start.addEventListener("click", function(){ 
-  if (!talking) {
+startBot.addEventListener("click", function(){ 
+  if (beeper != null && !talking) {
     beeper.start();
   }
 });
